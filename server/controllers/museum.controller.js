@@ -1,9 +1,6 @@
-//const passport = require("passport");
-//const User = require("../models/User");
 const Museum = require("../models/Museum");
 
 exports.newMuseum = async (req, res) => {
-  console.log(req.user)
   const { _id } = req.user;
   const { 
     name, 
@@ -32,7 +29,6 @@ exports.newMuseum = async (req, res) => {
 exports.getMuseum = async (req, res) => {
   const { id } = req.params;
   const museum = await Museum.findById(id);
-  console.log({museum})
   res.status(200).json({museum});
 }
 

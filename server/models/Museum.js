@@ -1,10 +1,10 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require('mongoose');
 
 const museumSchema = new Schema(
   {
     name:  {
       type: String,
-      required: true,
+      required: true
     },
     short: String,
     description: String,

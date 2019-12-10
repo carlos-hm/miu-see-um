@@ -71,5 +71,8 @@ app.use('/', index);
 const museum = require('./routes/museum');
 app.use('/museum', museum);
 
+const hall = require('./routes/hall');
+app.use('/hall', hall);
+
 
 module.exports = app;

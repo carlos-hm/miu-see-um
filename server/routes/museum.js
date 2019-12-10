@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const passport = require('passport');
 const catchErros = require("../middlewares/catchErrors");
 const { isAuth } = require('../middlewares/index');
 
@@ -9,7 +8,6 @@ const {
   updateMuseum
 } = require('../controllers/museum.controller');
 
-//Museum
 router.post('/new', isAuth, catchErros(newMuseum));
 router.get('/:id', catchErros(getMuseum));
 router.patch('/:id', catchErros(updateMuseum));
