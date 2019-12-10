@@ -7,7 +7,10 @@ exports.newHall = async (req, res) => {
     name,
   } = req.body;
 
-  const hall = await Hall.create({ name });
+  const hall = await Hall.create({ 
+    name, 
+    museumID: id 
+  });
 
   await Museum.findByIdAndUpdate(id, { $push: { halls: hall._id } });
 
@@ -32,6 +35,20 @@ exports.updateHall = async (req, res) => {
 
 exports.deleteHall = async (req, res) => {
   const { id } = req.params;
+  const hall = await Hall.findById(id);
+
+  const museumID = hall.museumID;
+  const museum = await Museum.findById(museumID);
+
+  const { halls } = museum
+  console.log(halls)
+  const indexhall = halls.indexOf(id)
+
+  if(indexhall !== -1){
+    halls.splice(indexhall, 1)
+  }
+
+  await Museum.findByIdAndUpdate(museumID, { $set: {halls: halls} });
   await Hall.findByIdAndDelete(id);
 
   res.status(200).json({ msg: "deleted" });

@@ -10,7 +10,8 @@ const hallSchema = new Schema(
       {
         type: Schema.Types.ObjectId
       }
-    ]
+    ],
+    museumID: Schema.Types.ObjectId
   },
   {
     timestamps: true,
