@@ -2,20 +2,31 @@ const { Schema, model } = require('mongoose')
 
 const museumSchema = new Schema(
   {
-    name: String,
+    name:  {
+      type: String,
+      required: true,
+    },
     short: String,
     description: String,
-    direction: String,
+    address: String,
     ticket: String,
-    hours: [
-      {
-        type: String
-      }
-    ],
     photoURL: String,
+    creatorID: {
+      type: Schema.Types.ObjectId,
+      required: true
+    },
+    hours: {
+        monday: String,
+        tuesday: String,
+        wednesday: String,
+        thursday: String,
+        friday: String,
+        saturday: String,
+        sunday: String
+    },
     halls: [
       {
-        type: String
+        type: Schema.Types.ObjectId
       }
     ]
   },

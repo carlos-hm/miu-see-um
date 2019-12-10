@@ -12,7 +12,7 @@ const cors         = require('cors');
 
 
 mongoose
-  .connect( process.env.DB ||'mongodb://localhost/server', {useNewUrlParser: true, useUndifinedTopolgy: true} )
+  .connect( process.env.DB ||'mongodb://localhost/server', {useNewUrlParser: true, useUnifiedTopology: true} )
   .then(x => console.log('Connected to Mongo!'))
   .catch(err => console.error('Error connecting to mongo', err));
 
@@ -67,6 +67,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const index = require('./routes/index');
 app.use('/', index);
+
+const museum = require('./routes/museum');
+app.use('/museum', museum);
 
 
 module.exports = app;
