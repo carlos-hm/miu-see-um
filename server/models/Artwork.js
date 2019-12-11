@@ -13,7 +13,7 @@ const artworkSchema = new Schema(
     },
     photoURL: String,
     audioURL: String,
-    refNumber: Number,
+    refNum: Number,
     hallID: {
       type: Schema.Types.ObjectId,
       required: true

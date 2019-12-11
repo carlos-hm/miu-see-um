@@ -11,6 +11,6 @@ const {
 router.post('/:id/new', catchErrors(newHall));
 router.get('/:id', catchErrors(getHall));
 router.patch('/:id', catchErrors(updateHall));
-router.post('/:id', catchErrors(deleteHall));
+router.delete('/:id', catchErrors(deleteHall));
 
 module.exports = router;

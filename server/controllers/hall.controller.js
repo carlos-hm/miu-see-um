@@ -40,15 +40,14 @@ exports.deleteHall = async (req, res) => {
   const museumID = hall.museumID;
   const museum = await Museum.findById(museumID);
 
-  const { halls } = museum
-  console.log(halls)
-  const indexhall = halls.indexOf(id)
+  const { halls } = museum;
+  const indexhall = halls.indexOf(id);
 
   if(indexhall !== -1){
     halls.splice(indexhall, 1)
   }
 
-  await Museum.findByIdAndUpdate(museumID, { $set: {halls: halls} });
+  await Museum.findByIdAndUpdate(museumID, { $set: { halls } });
   await Hall.findByIdAndDelete(id);
 
   res.status(200).json({ msg: "deleted" });
