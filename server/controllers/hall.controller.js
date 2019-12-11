@@ -1,5 +1,6 @@
 const Hall = require("../models/Hall");
 const Museum = require("../models/Museum");
+const Artwork = require("../models/Artwork");
 
 exports.newHall = async (req, res) => {
   const { id } = req.params;
@@ -36,6 +37,7 @@ exports.updateHall = async (req, res) => {
 exports.deleteHall = async (req, res) => {
   const { id } = req.params;
   const hall = await Hall.findById(id);
+  const { artworks } = hall;
 
   const museumID = hall.museumID;
   const museum = await Museum.findById(museumID);
@@ -48,6 +50,11 @@ exports.deleteHall = async (req, res) => {
   }
 
   await Museum.findByIdAndUpdate(museumID, { $set: { halls } });
+  
+  artworks.forEach(async element => {
+    await Artwork.findByIdAndDelete(element);
+  });
+  
   await Hall.findByIdAndDelete(id);
 
   res.status(200).json({ msg: "deleted" });
