@@ -11,6 +11,7 @@ const museumSchema = new Schema(
     address: String,
     ticket: String,
     photoURL: String,
+    updated: Boolean,
     creatorID: {
       type: Schema.Types.ObjectId,
       required: true

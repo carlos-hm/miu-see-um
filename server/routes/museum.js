@@ -5,10 +5,11 @@ const { isAuth } = require('../middlewares/index');
 const {
   newMuseum,
   getMuseum,
+  getMuseums,
   updateMuseum
 } = require('../controllers/museum.controller');
 
-router.post('/new', isAuth, catchErros(newMuseum));
+//router.post('/new', isAuth, catchErros(newMuseum));
 router.get('/:id', catchErros(getMuseum));
 router.patch('/:id', catchErros(updateMuseum));
 

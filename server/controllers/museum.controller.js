@@ -32,6 +32,12 @@ exports.getMuseum = async (req, res) => {
   res.status(200).json({museum});
 }
 
+exports.getMuseums = async (req, res) => {
+  const museums = await Museum.find({updated: true});
+
+  res.status(200).json({museums});
+}
+
 exports.updateMuseum = async (req, res) => {
   const { id } = req.params;
   const { 
@@ -52,6 +58,7 @@ exports.updateMuseum = async (req, res) => {
     ticket, 
     photoURL,
     hours,
+    updated: true,
   });
 
   res.status(200).json(museum);

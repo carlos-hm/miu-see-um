@@ -9,15 +9,17 @@ const {
   logout
 } = require('../controllers/auth.controller');
 
+const {
+  getMuseums
+} = require('../controllers/museum.controller');
 /* GET home page */
-router.get('/', (req, res, next) => {
-  res.status(200).json({msg: 'todo chido'})
-});
+router.get('/', catchErros(getMuseums));
 
 //Auth
 router.post('/signup', signup);
 router.post('/login', passport.authenticate('local'), login);
 router.get('/profile', getUser);
 router.get('/logout', logout);
+
 
 module.exports = router;
