@@ -71,7 +71,8 @@ class MyProvider extends Component {
           handleInput: this.handleInput,
           handleSignup: this.handleSignup,
           handleLogin: this.handleLogin,
-          handleLogout: this.handleLogout
+          handleLogout: this.handleLogout,
+          user: this.state.user
         }}
       >
         {this.props.children}

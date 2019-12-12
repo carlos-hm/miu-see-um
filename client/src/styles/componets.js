@@ -30,7 +30,11 @@ export const MuseumCard = styled.div`
   }
   & h2 {
     width: 100%;
-    margin: 0 0 2% 0;
+    margin: 0 0 0 0;
+    color: rgba(0,0,0,0.87);
+  } 
+  a {
+    text-decoration: none;
   }
   & small{
     width: 100%;
@@ -39,3 +43,29 @@ export const MuseumCard = styled.div`
   }
 `;
 
+export const MuseumDetail = styled.div`
+  width: 90%;
+  margin: 0% auto;
+  & img {
+    width: 100%;
+    height: 200px;
+    margin: 5% auto;
+    object-fit: cover;
+  };
+  & p:first-of-type {
+    padding-top: 5%;
+    color:rgba(0,0,0,0.87);
+    border-top: solid thin rgba(0,0,0,0.54);
+  } 
+  & p {
+    color: rgba(0,0,0,0.54);
+  }
+  & table {
+    width: 60%;
+    & td:nth-child(1) {
+      padding: 1% 0;
+      color: rgba(0,0,0,0.54);
+    }
+  }
+
+`;
