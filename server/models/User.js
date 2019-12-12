@@ -5,7 +5,10 @@ const userSchema = new Schema(
   {
     name: String,
     email: String,
-    photoUrl: String,
+    photoUrl: {
+      type: String,
+      default: 'https://i.ytimg.com/vi/KEkrWRHCDQU/maxresdefault.jpg'
+    }
   },
   {
     timestamps: true,
