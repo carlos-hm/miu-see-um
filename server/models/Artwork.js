@@ -16,6 +16,7 @@ const artworkSchema = new Schema(
     refNum: Number,
     hallID: {
       type: Schema.Types.ObjectId,
+      ref: 'Hall',
       required: true
     },
   },

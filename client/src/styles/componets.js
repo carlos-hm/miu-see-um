@@ -21,6 +21,7 @@ export const MuseumCard = styled.div`
     width: 90%;
     height: 150px;
     margin: 5% auto;
+    display: block;
     object-fit: cover;
   }
   & div {
@@ -68,4 +69,69 @@ export const MuseumDetail = styled.div`
     }
   }
 
+`;
+
+export const Hall = styled.div`
+  width: 100%;
+  margin-top: 10%;
+  & h2 {
+    margin-left: 4%;
+  }
+  & div {
+    width: 100%;
+    padding: 2%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: flex-wrap;
+    & a {
+    width: 46%;
+    margin: 2%;
+    }
+    img { 
+    width: 100%;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+    }
+  }
+`;
+
+export const ArtworkDetail = styled.div`
+  width: 100%;
+  & img {
+    width: 90%;
+    height: 300px;
+    margin: 0 auto;
+    display: block;
+    object-fit: cover;
+  }
+  & div {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 5%;
+    padding-top: 5%;
+    border-top: solid thin rgba(0,0,0,0.54);
+    & h2 {
+      font-size: 2em;
+    }; 
+    & small {
+      font-size: 1.2em;
+      color: rgba(0,0,0, 0.54)
+    }
+  }
+`;
+
+export const MapStyled = styled.figure` 
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  & img {
+    width: 100%;
+    padding: 5%;
+    box-sizing: border-box;
+  }
 `;

@@ -19,11 +19,19 @@ exports.newHall = async (req, res) => {
 };
 
 
-exports.getHall = async (req, res) => {
+exports.getHalls = async (req, res) => {
   const { id } = req.params;
-  const hall = await Hall.findById(id);
-
-  res.status(200).json(hall);
+  // const museum = await Museum.findByIdAndUpdate(id).populate('halls');
+  const museum = await Museum.findByIdAndUpdate(id).populate(
+    { 
+     path: 'halls',
+     populate: {
+       path: 'artworks',
+       model: 'Artwork'
+     } 
+  })
+  //.exec(function(err, docs) {});
+  res.status(200).json(museum);
 }
 
 exports.updateHall = async (req, res) => {

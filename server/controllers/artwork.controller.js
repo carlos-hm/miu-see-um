@@ -22,14 +22,14 @@ exports.newArtwork = async (req, res) => {
 
   await Hall.findByIdAndUpdate(id, { $push: { artworks: artwork._id } });
 
-  res.status(201).json(artwork);
+  res.status(201).json({artwork});
 };
 
 exports.getArtwork = async (req, res) => {
   const { id } = req.params;
   const artwork = await Artwork.findById(id);
 
-  res.status(200).json(artwork);
+  res.status(200).json({artwork});
 };
 
 exports.updateArtwork = async (req, res) => {
@@ -51,7 +51,7 @@ exports.updateArtwork = async (req, res) => {
     }
   });
 
-  res.status(200).json(artwork);
+  res.status(200).json({artwork});
 };
 
 exports.deleteArtwork = async (req, res) => {

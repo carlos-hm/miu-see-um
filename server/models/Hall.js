@@ -8,7 +8,8 @@ const hallSchema = new Schema(
     },
     artworks: [
       {
-        type: Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
+        ref: 'Artwork'
       }
     ],
     museumID: Schema.Types.ObjectId

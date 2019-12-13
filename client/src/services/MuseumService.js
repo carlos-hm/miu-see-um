@@ -14,4 +14,12 @@ export default class MuseumService {
   getMuseum(id) {
     return this.museums.get(`/museum/${id}`);
   }
+
+  getHalls(id) {
+    return this.museums.get(`/hall/${id}`);
+  }
+
+  getArtwork(id) {
+    return this.museums.get(`/artwork/${id}`);
+  }
 }

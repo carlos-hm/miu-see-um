@@ -11,6 +11,7 @@ const museumSchema = new Schema(
     address: String,
     ticket: String,
     photoURL: String,
+    mapURL: String,
     updated: Boolean,
     creatorID: {
       type: Schema.Types.ObjectId,
@@ -27,7 +28,8 @@ const museumSchema = new Schema(
     },
     halls: [
       {
-        type: Schema.Types.ObjectId
+        type: Schema.Types.ObjectId,
+        ref: 'Hall'
       }
     ]
   },

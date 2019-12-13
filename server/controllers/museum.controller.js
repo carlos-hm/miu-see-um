@@ -9,6 +9,7 @@ exports.newMuseum = async (req, res) => {
     address, 
     ticket, 
     photoURL,
+    mapURL,
     hours,
   } = req.body;
 
@@ -19,6 +20,7 @@ exports.newMuseum = async (req, res) => {
     address,
     ticket,
     photoURL,
+    mapURL,
     hours,
     creatorID: _id,
   });
@@ -29,6 +31,8 @@ exports.newMuseum = async (req, res) => {
 exports.getMuseum = async (req, res) => {
   const { id } = req.params;
   const museum = await Museum.findById(id);
+  console.log(museum);
+
   res.status(200).json({museum});
 }
 
@@ -47,6 +51,7 @@ exports.updateMuseum = async (req, res) => {
     address, 
     ticket, 
     photoURL,
+    mapURL,
     hours,
   } = req.body;
 
@@ -57,9 +62,10 @@ exports.updateMuseum = async (req, res) => {
     address, 
     ticket, 
     photoURL,
+    mapURL,
     hours,
     updated: true,
   });
 
-  res.status(200).json(museum);
+  res.status(200).json({museum});
 }

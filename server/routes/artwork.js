@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const catchErros = require("../middlewares/catchErrors");
+const catchErrors = require("../middlewares/catchErrors");
 
 const {
   newArtwork,
@@ -8,9 +8,9 @@ const {
   deleteArtwork
 } = require('../controllers/artwork.controller');
 
-router.post('/:id/new', catchErros(newArtwork));
-router.get('/:id', catchErros(getArtwork));
-router.patch('/:id', catchErros(updateArtwork));
-router.delete('/:id', catchErros(deleteArtwork));
+router.post('/:id/new', catchErrors(newArtwork));
+router.get('/:id', catchErrors(getArtwork));
+router.patch('/:id', catchErrors(updateArtwork));
+router.delete('/:id', catchErrors(deleteArtwork));
 
 module.exports = router;
