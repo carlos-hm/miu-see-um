@@ -31,7 +31,13 @@ exports.newMuseum = async (req, res) => {
 exports.getMuseum = async (req, res) => {
   const { id } = req.params;
   const museum = await Museum.findById(id);
-  console.log(museum);
+
+  res.status(200).json({museum});
+}
+
+exports.getUserMuseum = async (req, res) => {
+  const { id } = req.params;
+  const museum = await Museum.find({ creatorID: id });
 
   res.status(200).json({museum});
 }

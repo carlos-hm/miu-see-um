@@ -1,16 +1,18 @@
 const router = require('express').Router();
-const catchErros = require("../middlewares/catchErrors");
+const catchErrors = require("../middlewares/catchErrors");
 const { isAuth } = require('../middlewares/index');
 
 const {
   newMuseum,
   getMuseum,
   getMuseums,
-  updateMuseum
+  updateMuseum,
+  getUserMuseum
 } = require('../controllers/museum.controller');
 
 //router.post('/new', isAuth, catchErros(newMuseum));
-router.get('/:id', catchErros(getMuseum));
-router.patch('/:id', catchErros(updateMuseum));
+router.get('/:id', catchErrors(getMuseum));
+router.patch('/:id', catchErrors(updateMuseum));
+router.get('/profile/:id', catchErrors(getUserMuseum));
 
 module.exports = router;
