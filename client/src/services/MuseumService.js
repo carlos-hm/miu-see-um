@@ -15,11 +15,40 @@ export default class MuseumService {
     return this.museums.get(`/museum/${id}`);
   }
 
+  addHall(data, id) {
+    return this.museums.post(`/hall/${id}/new`, data)
+  }
+
+  getHall(id) {
+    return this.museums.get(`/hall/one/${id}`);
+  }
+  
   getHalls(id) {
     return this.museums.get(`/hall/${id}`);
+  }
+
+  updateHall(data, id) {
+    return this.museums.patch(`/hall/${id}`, data);
   }
 
   getArtwork(id) {
     return this.museums.get(`/artwork/${id}`);
   }
+
+  getUserMuseum(id) {
+    return this.museums.get(`/museum/profile/${id}`);
+  }
+
+  updateMuseum(data, id) {
+    return this.museums.patch(`/museum/${id}`, data);
+  }
+
+  updateArtwork(data, id) {
+    return this.museums.patch(`/artwork/${id}`, data);
+  }
+
+  addArtwork(data, id) {
+    return this.museums.post(`/artwork/${id}/new`, data);
+  }
+
 }

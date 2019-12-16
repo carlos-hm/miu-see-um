@@ -4,7 +4,7 @@ import { ArtworkDetail } from '../../styles/componets';
 export default function ArtworkDetailComp(props) {
   return (
       <ArtworkDetail>
-        <img src={props.photoURL}/>
+        <img src={props.photoURL} alt="Artwork"/>
         <div>
           <h2>{props.title}</h2>
           <small>{props.author}</small>

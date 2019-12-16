@@ -1,7 +1,12 @@
 import React, { Component, createContext } from 'react'
-import AUTH_SERVICE from './services/AuthService'
+import AUTH_SERVICE from './services/AuthService';
+
+//import MuseumService from './services/MuseumService';
+
+//const museumService = new MuseumService();
 
 export const MyContext = createContext()
+
 
 class MyProvider extends Component {
   state = {
@@ -15,7 +20,7 @@ class MyProvider extends Component {
       email: '',
       password: ''
     },
-    user: {}
+    user: {},
   }
 
   componentDidMount() {
@@ -28,6 +33,7 @@ class MyProvider extends Component {
     }
   }
 
+
   handleInput = (e, obj) => {
     const a = this.state[obj]
     const key = e.target.name
@@ -35,10 +41,28 @@ class MyProvider extends Component {
     this.setState({ obj: a })
   }
 
+  // handleInput = (e, obj) => {
+    
+
+  // //   this.setState(prevState => ({
+  // //     ...prevState,
+  // //     someProperty: {
+  // //         ...prevState.someProperty,
+  // //         someOtherProperty: {
+  // //             ...prevState.someProperty.someOtherProperty, 
+  // //             anotherProperty: {
+  // //                ...prevState.someProperty.someOtherProperty.anotherProperty,
+  // //                flag: false
+  // //             }
+  // //         }
+  // //     }
+  // // }))
+  // }
+
   handleSignup = async e => {
     e.preventDefault()
     const { data } = await AUTH_SERVICE.signup(this.state.formSignup)
-    console.log('User created');
+    console.log('User created', data);
   }
 
   handleLogin = (e, cb) => {

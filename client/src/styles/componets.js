@@ -135,3 +135,21 @@ export const MapStyled = styled.figure`
     box-sizing: border-box;
   }
 `;
+
+export const UserDashboard = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  & section {
+    width: 50%;
+    height: 80vh;
+  }
+`;
+
+export const EditView = styled.div`
+  width: 100%;
+  background-color: blue;
+  & div {
+    width: 40%;
+  }
+`;

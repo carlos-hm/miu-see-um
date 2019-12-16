@@ -7,7 +7,7 @@ export default function MuseumCardComp (props){
     <>
       <MuseumCard>
         <Link to={`/${props.route}`}>
-          <img src={props.photoURL}/>
+          <img src={props.photoURL} alt="Museum"/>
           <div>
             <h2>{props.name}</h2>
             <small>{props.address}</small>

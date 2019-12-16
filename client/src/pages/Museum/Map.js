@@ -22,7 +22,7 @@ export default class Map extends Component {
       <>
       { (museum) ?
         <MapStyled>
-          <img src={ museum.mapURL }/>
+          <img src={ museum.mapURL } alt="Museum map"/>
         </MapStyled> : null
       } 
       </>
