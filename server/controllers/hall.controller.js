@@ -44,7 +44,7 @@ exports.updateHall = async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
 
-  const hall = await Hall.findByIdAndUpdate(id, { name });
+  const hall = await Hall.findByIdAndUpdate(id, { name },{ new: true }).populate('artworks');
   res.status(200).json(hall);
 }
 

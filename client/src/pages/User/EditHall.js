@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import MuseumService from '../../services/MuseumService';
 import { Hall } from '../../styles/componets';
 import EditHallComp from '../../components/User/EditHallComp';
-
+import { MyContext } from '../../context';
 
 const museumService = new MuseumService();
 
@@ -13,12 +13,20 @@ export default class EditHall extends Component {
   };
 
   async componentDidMount() {
+    if(!this.context.loggedUser) return this.props.history.push('/login');
+
     const { id } = this.props.match.params;
     const {
       data: { hall }
     } = await museumService.getHall(id);
 
-    this.setState({hall})
+    this.setState({
+      ...this.state,
+      hall, 
+      name: hall.name
+    })
+
+    console.log(this.state)
   }
 
   inputChange = ({ target: { value, name } }) => {
@@ -32,14 +40,14 @@ export default class EditHall extends Component {
     e.preventDefault()
     const { _id } = this.state.hall;
     const { name } = this.state;
-    const hall = await museumService.updateHall({ name }, _id);
+    const { data: hall} = await museumService.updateHall({ name }, _id);
 
-    this.setState({
-      ...this.state, 
-      hall: { hall }
-    })
+    this.setState( prevState => ({
+      ...prevState,
+      hall 
+    }))
 
-    console.log('Hall updated', hall);
+    console.log(this.state);
   }
 
 
@@ -54,12 +62,13 @@ export default class EditHall extends Component {
   render() {
     const { museumID } = this.props.match.params;
     const { hall } = this.state;
+    const { name } = this.state;
     return(
       <>
       {
         (hall) ?
         <>
-          <Link>
+          <Link to={`/hall/${hall._id}`}>
             <small>add </small>
           </Link>
           <form
@@ -98,6 +107,7 @@ export default class EditHall extends Component {
                 placeholder = "Name"
                 type = "Text"
                 onChange = {this.inputChange}
+                value = {name}
               />
               <br/>
               <button type="submit">Update</button>
@@ -110,3 +120,5 @@ export default class EditHall extends Component {
     )
   }
 }
+
+EditHall.contextType = MyContext;

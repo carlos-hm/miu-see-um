@@ -39,7 +39,7 @@ exports.getUser = async (req, res, next ) => {
   res.status(200).json({ user })
 };
 
-exports.logout = ( req, res, next ) => {
+exports.logout = (req, res, next) => {
   req.logout()
   res.clearCookie('connect.sid')
   res.status(200).json({ msg: 'Logged Out' })

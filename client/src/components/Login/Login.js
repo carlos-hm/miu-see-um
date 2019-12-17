@@ -2,23 +2,21 @@ import React, { Component } from 'react'
 import { MyContext } from '../../context'
 
 export default class LoginContainer extends Component {
-  componentDidMount() {
-    console.log(this.context.loginForm)
+  componentDidUpdate() {
     if(this.context.loggedUser) {
-      console.log('lol')
-      return this.props.history.push('/profile')
+      //console.log(this.context.user)
+      return this.props.history.push(`/profile/${this.context.user._id}`)
     }
   }
 
   render() {
-    console.log(this.context)
     return (
       <MyContext.Consumer>
         {context => (
           <form
             onSubmit={ e => {
               context.handleLogin(e, () => {
-                this.props.history.push('/profile')
+                this.props.history.push(`/profile/${this.context.user._id}`)
               })
             }}
           >

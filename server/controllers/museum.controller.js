@@ -71,7 +71,7 @@ exports.updateMuseum = async (req, res) => {
     mapURL,
     hours,
     updated: true,
-  });
+  }, { new: true });
 
   res.status(200).json({museum});
 }

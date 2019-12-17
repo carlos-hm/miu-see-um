@@ -8,6 +8,8 @@ export const StyledNavbar = styled.nav`
 
 export const StyledNav = styled.nav`
   width: 100vw;
+  position: fixed;
+  top: 0px;
   background-color: white;
   & figure {
     width: 20%;
@@ -158,25 +160,32 @@ export const MapStyled = styled.figure`
 export const UserDashboard = styled.div`
   width: 100%;
   height: 80vh;
-  margin: 0 auto;
+  margin: 10% auto 0;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  & nav {
-    width: 100%;
-  }
   & section:first-child {
     width: 60%;
-    height: 80vh;
+    height: 84vh;
   }
   & section {
     width: 35%;
-    height: 85vh;
+    height: 84vh;
     overflow: scroll;
-    & div:first-child {
-      width: 100%;
-      padding-bottom: 10px;
+    & aside.halls {
+      margin: 0;
+      width: 35%;
+    }
+    & aside {
+      width: 54%;
+      margin-left: 3%;
+      position: fixed;
+      background-color: white;
       border-bottom: solid 1px #707070;
+      padding-bottom: 10px;
+    }
+    article {
+      margin-top: 16%;
     }
   }
 `;

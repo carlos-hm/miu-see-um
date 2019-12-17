@@ -6,6 +6,8 @@ import {UserDashboard, StyledNav} from '../../styles/componets';
 import UserHallComp from '../../components/User/UserHallComp';
 import AddHallComp from '../../components/User/AddHallComp';
 
+import { MyContext } from '../../context'
+
 
 const museumService = new MuseumService();
 
@@ -15,18 +17,31 @@ export default class UserMuseum extends Component{
   };
 
   async componentDidMount() {
+    if(!this.context.loggedUser) return this.props.history.push('/login')
+
+
     const {id} = this.props.match.params
+    //console.log(this.context.user)
+
+
     const {
       data: { museum }
-    } = await museumService.getMuseum(id)
-    const {
-      data: { halls }
-    } = await museumService.getHalls(id)
+    } = await museumService.getUserMuseum(id)
     this.setState({ 
       ...this.state,
-      halls, 
       museum 
     })
+     if(this.state.museum) {
+       const {
+         data: { halls }
+       } = await museumService.getHalls(this.state.museum._id)
+       this.setState({ 
+         ...this.state,
+         halls, 
+       })
+
+     }
+
   }
 
   inputChange = ({ target: { value, name } }) => {
@@ -59,6 +74,8 @@ export default class UserMuseum extends Component{
     const { id } = this.props.match.params
 
     return(
+      <MyContext.Consumer>
+      {context => (
       <>
       <StyledNav>
         <figure>
@@ -67,13 +84,21 @@ export default class UserMuseum extends Component{
           <img src={museum.logoURL} alt="Museum logo"/> : null
           }
         </figure>
+        <form
+          onSubmit={ e => {
+            context.handleLogout(e)
+            //props.history.push('/login')
+          }} >
+          <button className="icon"  style={{backgroundImage:"url(/ic-exit-to-app.svg)", border:"none"}} type="submit">Logout</button>
+        </form>
       </StyledNav>
       <UserDashboard>
       <section>
-        <div>
+        <aside>
           <h3>museum</h3>
-          <Link to={`/profile/${id}/edit`}>edit museum</Link>
-        </div>
+          <Link className="icon" to={`/profile/${id}/edit`}>edit</Link>
+        </aside>
+        <article>
         { (museum) ?
           <MuseumDetailComp 
             name = { museum.name }
@@ -84,14 +109,13 @@ export default class UserMuseum extends Component{
             hours = { museum.hours }
           /> : null
         }
+        </article>
       </section>
       <section>
-      <div>
+      <aside className="halls">
         <h3>halls</h3>
-        <Link to={`/`}>
-          <small>add</small>
-        </Link>
-      </div>
+        <Link className="icon" style={{backgroundImage:"url(/ic-add-circle.svg)"}} to={`/`}> add </Link>
+      </aside>
         <div>
           <h2>new hall</h2>
           <form 
@@ -120,6 +144,10 @@ export default class UserMuseum extends Component{
       </section>
       </UserDashboard>
       </>
+      )}
+      </MyContext.Consumer>
     )
   }
 }
+
+UserMuseum.contextType = MyContext;

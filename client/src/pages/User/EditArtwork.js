@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MuseumService from '../../services/MuseumService';
 import ArtworkDetailComp from '../../components/Museum/ArtworkComp';
 import EditArtworkComp from '../../components/User/EditArtworkComp';
+import { MyContext } from '../../context';
 
 const museumService = new MuseumService();
 
@@ -17,13 +18,21 @@ export default class EditArtwork extends Component {
   };
 
   async componentDidMount() {
+    if(!this.context.loggedUser) return this.props.history.push('/login')
+
     const { id } = this.props.match.params
     const {
       data: { artwork }
     } = await museumService.getArtwork(id)
     this.setState({
       ...this.state,
-      artwork 
+      artwork,
+      form: {
+        title: artwork.title,
+        description: artwork.description,
+        author: artwork.author,
+        photoURL: artwork.photoURL
+      }
     })
   }
 
@@ -51,20 +60,11 @@ export default class EditArtwork extends Component {
 
     formData.append('photoURL', this.state.file)
 
-    const {
-      data: { artwork }
-    } = await museumService.updateArtwork(formData, _id);
-
-    this.setState({
-      ...this.state,
-      form: {
-        title: '',
-        description: '',
-        author: '',
-        photoURL: ''
-      },
+    const { data: { artwork } }  = await museumService.updateArtwork(formData, _id);
+    this.setState(prevState => ({
+      ...prevState,
         artwork
-    })
+    }))
     console.log(this.state)
 
   }
@@ -83,6 +83,7 @@ export default class EditArtwork extends Component {
  
   render(){
     const { artwork } = this.state;
+    const { form } = this.state;
     return(
       <>
         { (artwork) ?
@@ -115,6 +116,7 @@ export default class EditArtwork extends Component {
               placeholder= "Title"
               type="text"
               onChange= {this.inputChange}
+              value = {form.title}
             />
             <br/>
             <input
@@ -122,13 +124,15 @@ export default class EditArtwork extends Component {
               placeholder= "Description"
               type="text"
               onChange= {this.inputChange}
+              value = {form.description}
             />
             <br/>
             <input
               name = "author"
               placeholder= "Author"
-              type="text"
-              onChange= {this.inputChange}
+              type ="text"
+              onChange = {this.inputChange}
+              value = {form.author}
             />
             <br/>
             <input 
@@ -145,3 +149,5 @@ export default class EditArtwork extends Component {
     )
   }
 }
+
+EditArtwork.contextType = MyContext;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MuseumDetailComp from '../../components/Museum/MuseumDetail';
 import MuseumService from '../../services/MuseumService';
 import { EditView } from '../../styles/componets';
+import { MyContext } from '../../context';
 
 const museumService = new MuseumService();
 
@@ -20,13 +21,24 @@ export default class EditMuseum extends Component{
   };
 
   async componentDidMount() {
+    if(!this.context.loggedUser) return this.props.history.push('/login')
+
     const {id} = this.props.match.params
     const {
       data: { museum }
-    } = await museumService.getMuseum(id)
+    } = await museumService.getUserMuseum(id)
     this.setState({ 
       ...this.state,
-      museum 
+      museum, 
+      form: {
+        name: museum.name,
+        short: museum.short,
+        description: museum.description,
+        address: museum.address,
+        ticket: museum.ticket,
+        photoURL: museum.photoURL,
+        mapURL: museum.mapURL
+      }
     })
     console.log(this.state)
   }
@@ -46,8 +58,7 @@ export default class EditMuseum extends Component{
   handleEditMuseum = async (e) => {
     e.preventDefault()
     const { _id } = this.state.museum;
-
-    const { form } = this.state;
+    //const { form } = this.state;
     const formData = new FormData()
 
     for(let key in this.state.form) {
@@ -56,28 +67,20 @@ export default class EditMuseum extends Component{
 
     formData.append('photoURL', this.state.file)
 
-    const {
-     data: { museum }
-    } = await museumService.updateMuseum(formData, _id);
-    
-    this.setState({
-      ...this.state,
-      form: {
-        name: '',
-        short: '',
-        description: '',
-        address: '',
-        ticket: '',
-        photoURL: '',
-        mapURL: '' 
-      }, 
-        museum
-    })
-    console.log(this.state)
-
-
-    //console.log(this.state);
-    //this.setState({ museum })
+    const { data: { museum }} = await museumService.updateMuseum(formData, _id);
+    this.setState(prevState => ({
+      ...prevState, 
+      museum,
+        form: {
+          name: '',
+          short: '',
+          description: '',
+          address: '',
+          ticket: '',
+          photoURL: '',
+          mapURL: '' 
+        }, 
+    }))
   }
 
   handleFile = e => {
@@ -86,7 +89,8 @@ export default class EditMuseum extends Component{
 
   render() {
     const { museum } = this.state;
-    //console.log(museum._id)
+    const { form } = this.state;
+    console.log(museum)
     return(
       <EditView>
         <section>
@@ -109,18 +113,22 @@ export default class EditMuseum extends Component{
             this.handleEditMuseum(e)
             //props.history.push('/login')
           }} >
+           { (form) ? 
             <input 
                 name="name"
                 placeholder="Name"
                 type="text"
                 onChange= {this.inputChange}
-              />
+                value={form.name}
+              />: null
+           }
             <br/>
             <input 
                 name="short"
                 placeholder="short"
                 type="text"
                 onChange= {this.inputChange}
+                value={form.short}
             />
             <br/>
             <input 
@@ -128,6 +136,7 @@ export default class EditMuseum extends Component{
                 placeholder="description"
                 type="text"
                 onChange= {this.inputChange}
+                value={form.description}
             />
             <br/>
             <input 
@@ -135,6 +144,7 @@ export default class EditMuseum extends Component{
                 placeholder="address"
                 type="text"
                 onChange= {this.inputChange}
+                value={form.address}
             />
             <br/>
             <input 
@@ -142,6 +152,7 @@ export default class EditMuseum extends Component{
                 placeholder="ticket"
                 type="text"
                 onChange= {this.inputChange}
+                value={form.ticket}
             />
             <br/>
             <input 
@@ -156,6 +167,7 @@ export default class EditMuseum extends Component{
                 placeholder="mapURL"
                 type="text"
                 onChange= {this.inputChange}
+                value={form.mapURL}
             />
             <br/>
             <button type="submit">Submit</button>
@@ -165,3 +177,5 @@ export default class EditMuseum extends Component{
     )
   }
 }
+
+EditMuseum.contextType = MyContext;

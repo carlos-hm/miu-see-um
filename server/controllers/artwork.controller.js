@@ -47,7 +47,7 @@ exports.updateArtwork = async (req, res) => {
       photoURL: req.file.secure_url,
       refNum
     }
-  });
+  }, { new: true });
 
   res.status(200).json({artwork});
 };

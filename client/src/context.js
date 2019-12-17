@@ -78,7 +78,8 @@ class MyProvider extends Component {
   }
 
   handleLogout = async cb => {
-    await AUTH_SERVICE.logout()
+    const  adios = await AUTH_SERVICE.logout()
+    console.log(adios)
     window.localStorage.clear()
     this.setState({ loggedUser: false, user: {} })
     cb()
