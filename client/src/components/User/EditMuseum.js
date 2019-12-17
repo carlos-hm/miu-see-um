@@ -8,14 +8,18 @@ const museumService = new MuseumService();
 
 export default class EditMuseumComp extends Component{
   state = {
+    file:{},
+
     // editMuseumForm:{
+    form: {
       name: '',
       short: '',
       description: '',
       address: '',
       ticket: '',
       photoURL: '',
-      mapURL: ''
+      mapURL: '' 
+    }
     // }
   };
 
@@ -26,7 +30,10 @@ export default class EditMuseumComp extends Component{
   inputChange = ({ target: { value, name } }) => {
     this.setState({
       ...this.state,
-      [name]: value
+      form:{
+        ...this.state.form,
+        [name]: value
+      }
     });
     console.log(this.state)
   };
@@ -34,30 +41,47 @@ export default class EditMuseumComp extends Component{
 
   handleEditMuseum = async (e) => {
     e.preventDefault()
-    const {museumID} = this.props;
+    const { museumID } = this.props;
 
-    const { 
-      name, 
-      short, 
-      description, 
-      address, 
-      ticket, 
-      photoURL, 
-      mapURL 
-    } = this.state;
+    // const { 
+    //   name, 
+    //   short, 
+    //   description, 
+    //   address, 
+    //   ticket, 
+    //   photoURL, 
+    //   mapURL 
+    // } = this.state;
 
-    const data = await museumService.updateMuseum({
-      name, 
-      short, 
-      description, 
-      address, 
-      ticket, 
-      photoURL, 
-      mapURL
-    }, museumID);
-    console.log('Museum updated', data);
+    const { form } = this.state;
+    const formData = new FormData()
+
+    for(let key in this.state.form) {
+      formData.append(key, this.state.form[key])
+    }
+
+    formData.append('photoURL', this.state.file)
+
+    const museum = await museumService.updateMuseum(formData, museumID);
+    console.log(museum);
+
+    this.setState()
+
+    // const data = await museumService.updateMuseum({
+    //   name, 
+    //   short, 
+    //   description, 
+    //   address, 
+    //   ticket, 
+    //   photoURL, 
+    //   mapURL
+    // }, museumID);
+    // console.log('Museum updated', data);
   }
 
+  handleFile = e => {
+    this.setState( { file: e.target.files[0] })
+  }
 
   render() {
     //const { editMuseumForm } = this.state;
@@ -110,9 +134,9 @@ export default class EditMuseumComp extends Component{
           <br/>
           <input 
               name="photoURL"
-              placeholder="photoURL"
-              type="text"
-              onChange= {this.inputChange}
+              type="file"
+              onChange= {this.handleFile}
+              required
           />
           <br/>
           <input 

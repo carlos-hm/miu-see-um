@@ -9,16 +9,15 @@ export const StyledNavbar = styled.nav`
 export const MuseumCard = styled.div`
     display: flex;
     flex-direction: column;
-    width: 85%;
+    width: 90%;
     height: auto;
-    margin: 5% auto;
-    border-radius: 10px;
+    margin: 10% auto;
     box-sizing: border-box;
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
   & img {
-    width: 90%;
+    width: 100%;
     height: 150px;
     margin: 5% auto;
     display: block;
@@ -29,7 +28,7 @@ export const MuseumCard = styled.div`
     margin: 0% auto;
     padding-bottom: 5%;
   }
-  & h2 {
+  & h3 {
     width: 100%;
     margin: 0 0 0 0;
     color: rgba(0,0,0,0.87);
@@ -40,7 +39,8 @@ export const MuseumCard = styled.div`
   & small{
     width: 100%;
     color: rgba(0,0,0,0.54);
-    font-size: 1.1em;
+    margin: 3% auto 0%;
+    display: block;
   }
 `;
 

@@ -10,6 +10,7 @@ export default function MuseumDetailComp(props) {
         <p>{props.description}</p>
         <p>{props.address}</p>
         <p>{props.ticket}</p>
+        { (props.hours) ?
         <table>
           <tbody>
             <tr> 
@@ -41,7 +42,8 @@ export default function MuseumDetailComp(props) {
               <td>{props.hours.sunday}</td>
             </tr>          
           </tbody>
-        </table>
+        </table> : null
+        }
     </MuseumDetail>
   </>
   )

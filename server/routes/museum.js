@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const catchErrors = require("../middlewares/catchErrors");
 const { isAuth } = require('../middlewares/index');
+const uploadPhoto = require('../config/cloudinary');
 
 const {
   newMuseum,
@@ -12,7 +13,7 @@ const {
 
 //router.post('/new', isAuth, catchErros(newMuseum));
 router.get('/:id', catchErrors(getMuseum));
-router.patch('/:id', catchErrors(updateMuseum));
+router.patch('/:id', uploadPhoto.single("photoURL"), catchErrors(updateMuseum));
 router.get('/profile/:id', catchErrors(getUserMuseum));
 
 module.exports = router;

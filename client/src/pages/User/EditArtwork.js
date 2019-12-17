@@ -16,12 +16,28 @@ export default class EditArtwork extends Component {
     this.setState({ artwork })
   }
 
+  handleDelete = async (e) => {
+    e.preventDefault()
+    const { id } = this.props.match.params;
+
+    await museumService.deleteArtwork(id);
+    console.log('Artwork deleted');
+  }
+
   render(){
     const { artwork } = this.state;
     return(
       <>
         { (artwork) ?
           <div>
+          <form
+            onSubmit = { e => {
+            this.handleDelete(e)
+            //this.history.push(`/profile/${museumID}`)
+          }}
+          >
+            <button type="submit">delete</button>
+          </form>
             <ArtworkDetailComp
               photoURL = { artwork.photoURL }
               title = { artwork.title }

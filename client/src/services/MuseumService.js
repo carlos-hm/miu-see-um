@@ -31,10 +31,10 @@ export default class MuseumService {
     return this.museums.patch(`/hall/${id}`, data);
   }
 
-  getArtwork(id) {
-    return this.museums.get(`/artwork/${id}`);
+  deleteHall(id) {
+    return this.museums.delete(`/hall/${id}`);
   }
-
+  
   getUserMuseum(id) {
     return this.museums.get(`/museum/profile/${id}`);
   }
@@ -43,12 +43,20 @@ export default class MuseumService {
     return this.museums.patch(`/museum/${id}`, data);
   }
 
+  getArtwork(id) {
+    return this.museums.get(`/artwork/${id}`);
+  }
+
   updateArtwork(data, id) {
     return this.museums.patch(`/artwork/${id}`, data);
   }
 
   addArtwork(data, id) {
     return this.museums.post(`/artwork/${id}/new`, data);
+  }
+
+  deleteArtwork(id) {
+    return this.museums.delete(`/artwork/${id}`);
   }
 
 }

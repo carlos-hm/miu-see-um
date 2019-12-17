@@ -56,7 +56,7 @@ exports.updateMuseum = async (req, res) => {
     description, 
     address, 
     ticket, 
-    photoURL,
+    //photoURL: req.file.secure_url,
     mapURL,
     hours,
   } = req.body;
@@ -67,7 +67,7 @@ exports.updateMuseum = async (req, res) => {
     description, 
     address, 
     ticket, 
-    photoURL,
+    photoURL: req.file.secure_url,
     mapURL,
     hours,
     updated: true,
