@@ -10,7 +10,7 @@ import MyProvider from './context';
 ReactDOM.render(
   <>
     <MyProvider>
-      <StyledNavbar/>
+      {/* <StyledNavbar/> */}
       <GlobalStyles/>
       <Routes />
     </MyProvider>

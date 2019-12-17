@@ -10,7 +10,7 @@ export default function UserHallComp (props) {
           <small>edit</small>
         </Link>
         <Link to={`/hall/${props.hallID}`}>
-          <small>add artwork</small>
+          <small> add artwork</small>
         </Link>
         <div>
           { props.artworks.map (artwork => (

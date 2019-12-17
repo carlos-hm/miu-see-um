@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MuseumDetailComp from '../../components/Museum/MuseumDetail';
 import MuseumService from '../../services/MuseumService';
-import {UserDashboard} from '../../styles/componets';
+import {UserDashboard, StyledNav} from '../../styles/componets';
 import UserHallComp from '../../components/User/UserHallComp';
 import AddHallComp from '../../components/User/AddHallComp';
 
@@ -10,7 +10,9 @@ import AddHallComp from '../../components/User/AddHallComp';
 const museumService = new MuseumService();
 
 export default class UserMuseum extends Component{
-  state = {};
+  state = {
+    name: ''
+  };
 
   async componentDidMount() {
     const {id} = this.props.match.params
@@ -20,20 +22,58 @@ export default class UserMuseum extends Component{
     const {
       data: { halls }
     } = await museumService.getHalls(id)
-    this.setState({ halls, museum })
+    this.setState({ 
+      ...this.state,
+      halls, 
+      museum 
+    })
+  }
+
+  inputChange = ({ target: { value, name } }) => {
+    this.setState({
+      ...this.state,
+      [name]: value
+    });
+  };
+
+  handleAddHall = async (e) => {
+    e.preventDefault()
+    const { _id } = this.state.museum
+    const { name } = this.state;
+
+    const data = await museumService.addHall({
+      name
+    }, _id);
+    
+    this.setState({
+      ...this.state,
+      halls: data
+    });
+    console.log('Hall added', data);
   }
   
  
   render() {
     const { museum } = this.state;
-    console.log(museum)
     const { halls } = this.state;
     const { id } = this.props.match.params
-    console.log(halls)
+
     return(
+      <>
+      <StyledNav>
+        <figure>
+          <img src="https://res.cloudinary.com/carlos-hm/image/upload/v1576561407/Muum/MuuM_logo_r0fbjo.png" alt="MuuM logo"/>
+          { (museum) ?  
+          <img src={museum.logoURL} alt="Museum logo"/> : null
+          }
+        </figure>
+      </StyledNav>
       <UserDashboard>
       <section>
-      <Link to={`/profile/${id}/edit`}>edit museum</Link>
+        <div>
+          <h3>museum</h3>
+          <Link to={`/profile/${id}/edit`}>edit museum</Link>
+        </div>
         { (museum) ?
           <MuseumDetailComp 
             name = { museum.name }
@@ -46,13 +86,29 @@ export default class UserMuseum extends Component{
         }
       </section>
       <section>
-      <h2>halls</h2>
-      <Link to={`/`}>
-        <small>add</small>
-      </Link>
-      <AddHallComp 
-            museumID = {id}
+      <div>
+        <h3>halls</h3>
+        <Link to={`/`}>
+          <small>add</small>
+        </Link>
+      </div>
+        <div>
+          <h2>new hall</h2>
+          <form 
+            onSubmit={e => {
+              this.handleAddHall(e)
+            }}
+          >
+          <input
+            name = "name"
+            placeholder = "Name"
+            type = "text"
+            onChange = {this.inputChange}
           />
+          <br/>
+          <button type="submit"> add</button>
+          </form>
+        </div>
         { (halls) ?
           halls.map (hall => (
             <UserHallComp
@@ -63,6 +119,7 @@ export default class UserMuseum extends Component{
         )): null }
       </section>
       </UserDashboard>
+      </>
     )
   }
 }

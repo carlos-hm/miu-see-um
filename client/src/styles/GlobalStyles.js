@@ -2,17 +2,15 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 html, body{
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   font-size: 16px;
-  width: 100%;
-  height: 100%;
-  background-color: #E8E8E8;
+  max-width: 1280px;
+  height: 100vh;
   font-family: 'Montserrat', sans-serif;
 }
 body{
   position: relative;
-  margin-top: 80px;
 }
 `;
 

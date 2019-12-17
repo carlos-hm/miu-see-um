@@ -6,6 +6,26 @@ export const StyledNavbar = styled.nav`
   background-color: red;
 `;
 
+export const StyledNav = styled.nav`
+  width: 100vw;
+  background-color: white;
+  & figure {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    & img:first-child {
+      width: 30%;
+      padding-right: 8%;
+      border-right: solid medium rgba(0,0,0,0.87);
+    };
+    & img {
+      width: 40%;
+      margin: 2% 5%;
+    }
+  }
+
+`
+
 export const MuseumCard = styled.div`
     display: flex;
     flex-direction: column;
@@ -46,17 +66,16 @@ export const MuseumCard = styled.div`
 
 export const MuseumDetail = styled.div`
   width: 90%;
-  margin: 0% auto;
+  margin: 5% auto 0%;
   & img {
     width: 100%;
-    height: 200px;
-    margin: 5% auto;
+    height: 300px;
+    margin: 2% auto;
     object-fit: cover;
   };
   & p:first-of-type {
     padding-top: 5%;
     color:rgba(0,0,0,0.87);
-    border-top: solid thin rgba(0,0,0,0.54);
   } 
   & p {
     color: rgba(0,0,0,0.54);
@@ -138,18 +157,61 @@ export const MapStyled = styled.figure`
 
 export const UserDashboard = styled.div`
   width: 100%;
+  height: 80vh;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
-  & section {
-    width: 50%;
+  justify-content: space-around;
+  & nav {
+    width: 100%;
+  }
+  & section:first-child {
+    width: 60%;
     height: 80vh;
+  }
+  & section {
+    width: 35%;
+    height: 85vh;
+    overflow: scroll;
+    & div:first-child {
+      width: 100%;
+      padding-bottom: 10px;
+      border-bottom: solid 1px #707070;
+    }
   }
 `;
 
 export const EditView = styled.div`
   width: 100%;
-  background-color: blue;
-  & div {
-    width: 40%;
-  }
+  display: flex;
+  justify-content: space-around;
+  & section:first-child {
+    width: 30%;
+  };
+  & section {
+    width: 60%;
+    & form {
+      width: 100%;
+      & input {
+        font-family: 'Montserrat',sans-serif;
+        width: 90%;
+        margin: 2% 0;
+        padding: 1% 0% 1% 2%;
+        font-size: 1.2em;
+        border: none;
+        border-bottom: solid 1px #707070;
+      };
+      & button {
+        font-family: 'Montserrat',sans-serif;
+        display: flex;
+        align-self: flex-end;
+        padding: 2% 5%;
+        background-color: #00A5A8;
+        color: white;
+        border: none;
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+    }
+  } 
 `;

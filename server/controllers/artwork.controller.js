@@ -7,7 +7,6 @@ exports.newArtwork = async (req, res) => {
     title,
     description,
     author,
-    photoURL,
     refNum,
   } = req.body;
 
@@ -15,7 +14,7 @@ exports.newArtwork = async (req, res) => {
     title,
     description,
     author,
-    photoURL,
+    photoURL: req.file.secure_url,
     refNum,
     hallID: id
   });
@@ -38,7 +37,6 @@ exports.updateArtwork = async (req, res) => {
     title,
     description,
     author,
-    photoURL,
     refNum,
   } = req.body;
 
@@ -46,7 +44,7 @@ exports.updateArtwork = async (req, res) => {
       title,
       description,
       author,
-      photoURL,
+      photoURL: req.file.secure_url,
       refNum
     }
   });

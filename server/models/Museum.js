@@ -11,6 +11,7 @@ const museumSchema = new Schema(
     address: String,
     ticket: String,
     photoURL: String,
+    logoURL: String,
     mapURL: String,
     updated: Boolean,
     creatorID: {
