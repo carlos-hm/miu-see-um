@@ -285,4 +285,23 @@ export const EditAside = styled.aside`
     margin-left: 2%;
     width: 90%;
   }
+`;
+
+export const MuseumNav = styled.nav`
+  width: 100%;
+  padding: 10% 0;
+  position: fixed;
+  top: 0%;
+  background-color: white;
+  & img {
+    width: 30%;
+    position: absolute;
+    top: 20%;
+    left: 34%;
+  }
+`;
+
+export const MarginCont = styled.div`
+  width: 100%;
+  margin-top: 27%;
 `

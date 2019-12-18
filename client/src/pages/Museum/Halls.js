@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MuseumService from '../../services/MuseumService'
 import HallComp from '../../components/Museum/HallComp';
+import { MuseumNav, MarginCont } from '../../styles/componets';
+
 
 const museumService = new MuseumService();
 
@@ -13,20 +15,27 @@ export default class Halls extends Component{
     const {
       data: { halls }
     } = await museumService.getHalls(id)
-    this.setState({ halls })
+
+    const {
+      data: { museum }
+    } = await museumService.getMuseum(id);
+    this.setState({ halls, museum })
+    console.log(this.state)
   }
 
   render() {
-    const { halls } = this.state;
+    const { halls, museum } = this.state;
     const { id } = this.props.match.params
     return(
-      <>
-      <Link to={`/detail/${id}`}>
-      detail
-      </Link>
-      <Link to={`/map/${id}` }>
-        map
-      </Link>
+      <MarginCont>
+        <MuseumNav>
+        {
+          (museum) ? 
+          <img src={museum.logoURL} alt="MuuM logo"/> : null
+        }
+          <Link  className="iconDetail" to={`/detail/${id}`}> detail </Link>
+          <Link to={`/map/${id}` }> map </Link>
+        </MuseumNav>
       { (halls) ?
         halls.map (hall => (
           <HallComp
@@ -34,7 +43,7 @@ export default class Halls extends Component{
             artworks = {hall.artworks}
           />
       )): null }
-      </>
+      </MarginCont>
     )
   }
 }

@@ -73,6 +73,18 @@ body{
   text-indent: -9999px;
 };
 
+.iconDetail { 
+  display: block;
+  width: 35px;
+  padding: 10px 0%;
+  border: none;
+  background-image: url("/ic-info-outline.svg");
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+};
+
 .firstHall {
       margin: 24% 0 10%;
     }

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import MuseumCardComp from '../Museum/MuseumCard';
 import MuseumService from '../../services/MuseumService';
+import { MuseumNav, MarginCont } from '../../styles/componets';
 
 const museumService = new MuseumService();
 
 export default class Home extends Component{
   state = {
     museums: []
-    // name: "MUAC",
-    // address: "Insurgentes 3000,  Coyoacán, 04510, C.U. CDMX, México",
-    // photoURL: "https://www.saint-gobain.com.mx/sites/sgmx.master/files/muac_c_0.jpg",
   };
 
   async componentDidMount() {
@@ -24,16 +22,19 @@ export default class Home extends Component{
   render() {
     const { museums } = this.state;
     return (
-      <>
-        {museums.map (museum => (
-          <MuseumCardComp
-            route = { museum._id }
-            name = { museum.name }
-            address = { museum.address }
-            photoURL = { museum.photoURL }
-          />
-        ))}
-      </>
+      <MarginCont>
+        <MuseumNav>
+          <img src="https://res.cloudinary.com/carlos-hm/image/upload/v1576705470/Muum/MuuM_logoH_fo8fy5.png" alt="MuuM logo"/>
+        </MuseumNav>
+          {museums.map (museum => (
+            <MuseumCardComp
+              route = { museum._id }
+              name = { museum.name }
+              address = { museum.address }
+              photoURL = { museum.photoURL }
+            />
+          ))}
+      </MarginCont>
     )
   }
 }
