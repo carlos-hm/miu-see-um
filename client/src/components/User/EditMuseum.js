@@ -89,7 +89,7 @@ export default class EditMuseumComp extends Component{
       // <MyContext.Consumer>
       // { context => (
         <>
-        <h2>Edit museum</h2>
+        <h2>Edit museumo</h2>
         <form 
         // onSubmit = { this.handleEditMuseum } >
          onSubmit={ e => {
@@ -111,7 +111,7 @@ export default class EditMuseumComp extends Component{
               onChange= {this.inputChange}
           />
           <br/>
-          <input 
+          <textarea rows="4" cols="50"
               name="description"
               placeholder="description"
               type="text"

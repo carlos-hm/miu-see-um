@@ -61,8 +61,16 @@ class MyProvider extends Component {
 
   handleSignup = async e => {
     e.preventDefault()
-    const { data } = await AUTH_SERVICE.signup(this.state.formSignup)
-    console.log('User created', data);
+    try {
+      await AUTH_SERVICE.signup(this.state.formSignup).then(okey => {
+        if (okey) {
+          window.location.href = "/login";
+        }
+      })
+    } catch (err) {
+      console.log(err)
+    }
+    //console.log('User created', data);
   }
 
   handleLogin = (e, cb) => {

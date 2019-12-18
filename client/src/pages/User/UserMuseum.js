@@ -13,7 +13,8 @@ const museumService = new MuseumService();
 
 export default class UserMuseum extends Component{
   state = {
-    name: ''
+    name: '',
+    showForm: false
   };
 
   async componentDidMount() {
@@ -64,11 +65,19 @@ export default class UserMuseum extends Component{
     }));
     //console.log('Hall added', data);
   }
+
+  toggle = () =>  {
+    let value = !this.state.showForm;
+
+    this.setState(prevState => ({
+      ...prevState,
+      showForm: value,
+    }))
+  }
   
  
   render() {
-    const { museum } = this.state;
-    const { halls } = this.state;
+    const { museum, halls, showForm} = this.state;
     const { id } = this.props.match.params
 
     return(
@@ -100,25 +109,33 @@ export default class UserMuseum extends Component{
       <section>
       <aside className="halls">
         <h3>halls</h3>
-        <Link className="icon" style={{backgroundImage:"url(/ic-add-circle.svg)"}} to={`/`}> add </Link>
+        <Link className="icon" style={{backgroundImage:"url(/ic-add-circle.svg)"}} onClick={this.toggle}> add </Link>
       </aside>
+      <div className="firstHall">
+
+      
+      { (showForm) ?
         <div>
-          <h2>new hall</h2>
+          <h3>new hall</h3>
           <form 
             onSubmit={e => {
               this.handleAddHall(e)
+              this.toggle(e)
             }}
           >
           <input
             name = "name"
-            placeholder = "Name"
+            placeholder = "Hall..."
             type = "text"
+            maxlength="10"
             onChange = {this.inputChange}
           />
+          <label>name</label>
           <br/>
           <button type="submit"> add</button>
           </form>
-        </div>
+        </div> : null
+      }
         { (halls) ?
           halls.map (hall => (
             <UserHallComp
@@ -127,6 +144,7 @@ export default class UserMuseum extends Component{
               hallID = {hall._id}
             />
         )): null }
+        </div>
       </section>
       </UserDashboard>
       </>

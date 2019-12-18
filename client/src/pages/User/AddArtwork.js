@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import MuseumService from '../../services/MuseumService';
 import { MyContext } from '../../context';
+import { EditView, EditAside } from '../../styles/componets';
+import ArtworkDetailComp from '../../components/Museum/ArtworkComp'
+
 
 const museumService = new MuseumService();
 
@@ -61,52 +65,73 @@ export default class AddArtwork extends Component{
     this.setState( { file: e.target.files[0] })
   }
 
+  goBack = () => {
+    this.props.history.goBack()
+  }
+
   render() {
     const {hall} = this.state;
     return(
       <MyContext.Consumer>
       {context => (
       <>
-      {
-        (hall) ?
-        <h2>new artwork on {hall.name}</h2> : null
+      <EditAside>
+        <Link onClick={this.goBack} className="iconBack">
+          back
+        </Link>
+        {
+        (hall) ? 
+        <h3>new artwork on {hall.name}</h3>: null
       }
-        <form
-          onSubmit= { e => {
-            this.handleAddArtwork(e)
-            //this.props.history.goBack();
-          }}
-        >
-          <input
-            name = "title"
-            placeholder= "Title"
-            type="text"
-            onChange= {this.inputChange}
-          />
-          <br/>
-          <input
-            name = "description"
-            placeholder= "Description"
-            type="text"
-            onChange= {this.inputChange}
-          />
-          <br/>
-          <input
-            name = "author"
-            placeholder= "Author"
-            type="text"
-            onChange= {this.inputChange}
-          />
-          <br/>
-          <input 
-            name="photoURL"
-            type="file"
-            onChange= {this.handleFile}
-            required
-          />
-          <br/>
-          <button type="submit">add</button> 
-        </form>
+      </EditAside>
+      <EditView>
+        <section>
+          <ArtworkDetailComp
+            photoURL = "https://res.cloudinary.com/carlos-hm/image/upload/v1576540607/Muum/muac_c_0.jpg.jpg"
+            title = "Artwork title"
+            author = "Author name"
+            description =  "Artwork description"
+          /> 
+        </section>
+        <section>
+          <form
+            onSubmit= { e => {
+              this.handleAddArtwork(e)
+              //this.props.history.goBack();
+            }}
+          >
+            <input
+              name = "title"
+              placeholder= "Title"
+              type="text"
+              onChange= {this.inputChange}
+            />
+            <br/>
+            <textarea rows="4" cols="50"
+              name = "description"
+              placeholder= "Description"
+              type="text"
+              onChange= {this.inputChange}
+            />
+            <br/>
+            <input
+              name = "author"
+              placeholder= "Author"
+              type="text"
+              onChange= {this.inputChange}
+            />
+            <br/>
+            <input 
+              name="photoURL"
+              type="file"
+              onChange= {this.handleFile}
+              required
+            />
+            <br/>
+            <button type="submit">add</button> 
+          </form>
+        </section>
+        </EditView>
       </>
       )}
       </MyContext.Consumer>

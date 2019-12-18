@@ -10,6 +10,7 @@ export const StyledNav = styled.nav`
   width: 100vw;
   position: fixed;
   top: 0px;
+  max-width: 93%;
   background-color: white;
   & figure {
     width: 20%;
@@ -25,7 +26,6 @@ export const StyledNav = styled.nav`
       margin: 2% 5%;
     }
   }
-
 `
 
 export const MuseumCard = styled.div`
@@ -88,8 +88,8 @@ export const MuseumDetail = styled.div`
       padding: 1% 0;
       color: rgba(0,0,0,0.54);
     }
+    margin-bottom:10%
   }
-
 `;
 
 export const Hall = styled.div`
@@ -130,7 +130,7 @@ export const ArtworkDetail = styled.div`
   width: 100%;
   & img {
     width: 90%;
-    height: 300px;
+    height: 20vh;
     margin: 0 auto;
     display: block;
     object-fit: cover;
@@ -182,40 +182,34 @@ export const UserDashboard = styled.div`
       width: 35%;
     }
     & aside {
-      width: 54%;
-      margin-left: 3%;
+      width: 56%;
+      margin-left: 2%;
       position: fixed;
       background-color: white;
       border-bottom: solid 1px #707070;
-      padding-bottom: 10px;
+      padding-bottom: 8px;
+      max-width: 710px;
     }
     article {
       margin-top: 16%;
     }
-  }
-`;
-
-export const EditView = styled.div`
-  width: 100%;
-  margin-top: 100px;
-  display: flex;
-  justify-content: space-around;
-  & section:first-child {
-    width: 30%;
-  };
-  & section {
-    width: 60%;
-    & form {
-      width: 100%;
+    & div {
+      & h3 {
+        display: block;
+      }
       & input {
-        font-family: 'Montserrat',sans-serif;
-        width: 90%;
-        margin: 2% 0;
-        padding: 1% 0% 1% 2%;
-        font-size: 1.2em;
-        border: none;
-        border-bottom: solid 1px #707070;
-      };
+          font-family: 'Montserrat',sans-serif;
+          width: 90%;
+          margin: 2% 0;
+          padding: 1% 0% 1% 2%;
+          font-size: 1em;
+          border: none;
+          border-bottom: solid 1px #707070;
+      } 
+      & label {
+        color: #707070;
+        font-size: .8em;
+      }
       & button {
         font-family: 'Montserrat',sans-serif;
         display: flex;
@@ -224,8 +218,58 @@ export const EditView = styled.div`
         background-color: #00A5A8;
         color: white;
         border: none;
-        font-size: 1.3em;
-        font-weight: bold;
+        font-size: 1em;
+        margin-top: 2%;
+        margin-left: 74%;
+      }
+    } 
+  }
+`;
+
+export const EditView = styled.div`
+  width: 100%;
+  margin-top: 8vh;
+  display: flex;
+  justify-content: space-around;
+  & section:first-child {
+    width: 35%;
+  };
+  & section {
+    width: 55%;
+    & form {
+      width: 100%;
+      & input {
+        font-family: 'Montserrat',sans-serif;
+        width: 90%;
+        margin: 4% 0 1%;
+        padding: 1% 0% 1% 2%;
+        font-size: 1.2em;
+        border: none;
+        border-bottom: solid 1px #707070;
+      };
+      & textarea {
+        font-family: 'Montserrat',sans-serif;
+        width: 90%;
+        margin: 4% 0 1%;
+        padding: 1% 0% 1% 2%;
+        font-size: 1.2em;
+        border: none;
+        border-bottom: solid 1px #707070;
+      }
+      & label {
+        color: #707070;
+      }
+      & button {
+        font-family: 'Montserrat',sans-serif;
+        display: flex;
+        align-self: flex-end;
+        padding: 2% 5%;
+        background-color: #00A5A8;
+        color: white;
+        border: none;
+        font-size: 1em;
+        margin-top: 2%;
+        margin-left: 74%;
       }
     }
   } 
@@ -233,10 +277,10 @@ export const EditView = styled.div`
 
 export const EditAside = styled.aside`
   width: 96%;
-  margin: 5% auto 0;
+  margin: 2% auto 0;
   display: flex;
   align-items: center;
-  border-bottom: solid 1px #707070;
+  border-bottom: solid 2px black;
   & h3 {
     margin-left: 2%;
     width: 90%;

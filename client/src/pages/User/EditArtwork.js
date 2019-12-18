@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import MuseumService from '../../services/MuseumService';
 import ArtworkDetailComp from '../../components/Museum/ArtworkComp';
 import { MyContext } from '../../context';
-import { EditView } from '../../styles/componets';
+import { EditView, EditAside } from '../../styles/componets';
 
 
 const museumService = new MuseumService();
@@ -81,6 +82,10 @@ export default class EditArtwork extends Component {
     await museumService.deleteArtwork(id);
     console.log('Artwork deleted');
   }
+
+  goBack = () => {
+    this.props.history.goBack()
+  }
  
   render(){
     const { artwork } = this.state;
@@ -89,32 +94,39 @@ export default class EditArtwork extends Component {
       <MyContext.Consumer>
       {context => (
       <>
-      <EditView>
         { (artwork) ?
-          <section>
-          <form
+        <>
+      <EditAside>
+        <Link onClick={this.goBack} className="iconBack">
+          back
+        </Link>
+        <h3>Edit artwork</h3>
+        <form
             onSubmit = { e => {
             this.handleDelete(e)
             this.props.history.push(`/profile/${this.context.user._id}`)
           }}
           >
-            <button type="submit">delete</button>
+            <button type="submit" className="iconDeleteHall">delete</button>
           </form>
+      </EditAside>
+      <EditView>
+          <section>
             <ArtworkDetailComp
               photoURL = { artwork.photoURL }
               title = { artwork.title }
               author = { artwork.author }
               description =  { artwork.description }
             /> 
-          </section> : null
-        }
+          </section> 
         <section>
-          <h2>Edit artwork</h2>
           <form
             onSubmit= { e => {
               this.handleEditArtwork(e)
             }} 
           >
+            <label>title</label>
+            <br/>
             <input
               name = "title"
               placeholder= "Title"
@@ -123,13 +135,17 @@ export default class EditArtwork extends Component {
               value = {form.title}
             />
             <br/>
-            <input
+            <label>description</label>
+            <br/>
+            <textarea rows="4" cols="50"
               name = "description"
               placeholder= "Description"
               type="text"
               onChange= {this.inputChange}
               value = {form.description}
             />
+            <br/>
+            <label>author</label>
             <br/>
             <input
               name = "author"
@@ -138,6 +154,8 @@ export default class EditArtwork extends Component {
               onChange = {this.inputChange}
               value = {form.author}
             />
+            <br/>
+            <label>photo</label>
             <br/>
             <input 
               name="photoURL"
@@ -150,6 +168,8 @@ export default class EditArtwork extends Component {
           </form>
         </section>
       </EditView>
+      </>: null
+        }
       </> )}
       </MyContext.Consumer>
     )

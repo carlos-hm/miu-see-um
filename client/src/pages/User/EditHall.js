@@ -58,6 +58,10 @@ export default class EditHall extends Component {
     console.log('Hall deleted');
   }
 
+  goBack = () => {
+    this.props.history.goBack()
+  }
+
   render() {
     const { hall } = this.state;
     const { name } = this.state;
@@ -66,7 +70,7 @@ export default class EditHall extends Component {
         { (hall) ?
           <>
       <EditAside>
-        <Link className="iconBack">
+        <Link onClick={this.goBack} className="iconBack">
           back
         </Link>
         <h3>Edit hall</h3>
@@ -89,12 +93,12 @@ export default class EditHall extends Component {
             </article>
               <div>
               {
-                (hall.artworks) ?
+                (hall.artworks.length !== 0) ?
                 hall.artworks.map (artwork => (
                 <Link to={`/artwork/${artwork._id}/edit`}>
                   <img src={artwork.photoURL} alt="artwork"/>
                 </Link>
-              )) : null
+              )) : <div>no artworks yet</div>
               }
               </div>
             </Hall>

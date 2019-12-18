@@ -72,6 +72,11 @@ body{
   background-repeat: no-repeat;
   text-indent: -9999px;
 };
+
+.firstHall {
+      margin: 24% 0 10%;
+    }
+
 `;
 
 

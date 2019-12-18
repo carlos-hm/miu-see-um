@@ -14,6 +14,7 @@ exports.signup = async (req, res, next) => {
     address: 'Museum address',
     ticket: 'Ticket $price',
     photoURL: 'https://www.saint-gobain.com.mx/sites/sgmx.master/files/muac_c_0.jpg',
+    logoURL: 'http://mib.puebla.gob.mx/images/site/slides/slide1/logo-museo.png',
     updated: false,
     "hours": { 
     	"monday": "closed",

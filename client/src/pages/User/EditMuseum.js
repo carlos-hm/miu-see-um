@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import MuseumDetailComp from '../../components/Museum/MuseumDetail';
 import MuseumService from '../../services/MuseumService';
-import { EditView } from '../../styles/componets';
+import { EditView, EditAside } from '../../styles/componets';
 import { MyContext } from '../../context';
-import UserNav from '../../components/User/UserNav';
 
 const museumService = new MuseumService();
 
@@ -88,6 +88,10 @@ export default class EditMuseum extends Component{
     this.setState( { file: e.target.files[0] })
   }
 
+  goBack = () => {
+    this.props.history.goBack()
+  }
+
   render() {
     const { museum } = this.state;
     const { form } = this.state;
@@ -96,9 +100,15 @@ export default class EditMuseum extends Component{
       <MyContext.Consumer>
       {context => (
       <>
-      <UserNav
+      {/* <UserNav
         museum = { museum }
-      />
+      /> */}
+      <EditAside>
+        <Link onClick={this.goBack} className="iconBack">
+          back
+        </Link>
+        <h3>Edit museum</h3>
+      </EditAside>
       <EditView>
         <section>
           {
@@ -114,21 +124,20 @@ export default class EditMuseum extends Component{
           }
         </section>
         <section>
-          <h2>Edit museum</h2>
+           { (form) ?
           <form
           onSubmit={ e => {
             this.handleEditMuseum(e)
             //props.history.push('/login')
           }} >
-           { (form) ? 
             <input 
                 name="name"
                 placeholder="Name"
                 type="text"
                 onChange= {this.inputChange}
                 value={form.name}
-              />: null
-           }
+              />
+            <label>museum name</label>
             <br/>
             <input 
                 name="short"
@@ -137,14 +146,16 @@ export default class EditMuseum extends Component{
                 onChange= {this.inputChange}
                 value={form.short}
             />
+            <label>musuem short</label>
             <br/>
-            <input 
+            <textarea rows="4" cols="50" 
                 name="description"
                 placeholder="description"
                 type="text"
                 onChange= {this.inputChange}
                 value={form.description}
             />
+            <label>description</label>
             <br/>
             <input 
                 name="address"
@@ -153,6 +164,7 @@ export default class EditMuseum extends Component{
                 onChange= {this.inputChange}
                 value={form.address}
             />
+            <label>address</label>
             <br/>
             <input 
                 name="ticket"
@@ -162,12 +174,16 @@ export default class EditMuseum extends Component{
                 value={form.ticket}
             />
             <br/>
+            <label>ticket price</label>
+            <br/>
             <input 
                 name="photoURL"
                 type="file"
                 onChange= {this.handleFile}
                 required
             />
+            <br/>
+            <label>photo</label>
             <br/>
             <input 
                 name="mapURL"
@@ -176,9 +192,11 @@ export default class EditMuseum extends Component{
                 onChange= {this.inputChange}
                 value={form.mapURL}
             />
+            <label>interior map</label>
             <br/>
             <button type="submit">Submit</button>
-          </form>
+          </form>: null
+           }
         </section>
       </EditView>
       </>
