@@ -34,6 +34,8 @@ export default class EditArtwork extends Component {
         photoURL: artwork.photoURL
       }
     })
+
+    console.log(this.context.user)
   }
 
   inputChange = ({ target: { value, name } }) => {
@@ -84,14 +86,17 @@ export default class EditArtwork extends Component {
   render(){
     const { artwork } = this.state;
     const { form } = this.state;
+    const { user } = this.context.user
     return(
+      <MyContext.Consumer>
+      {context => (
       <>
         { (artwork) ?
           <div>
           <form
             onSubmit = { e => {
             this.handleDelete(e)
-            //this.history.push(`/profile/${museumID}`)
+            this.props.history.push(`/profile/${this.context.user._id}`)
           }}
           >
             <button type="submit">delete</button>
@@ -145,7 +150,8 @@ export default class EditArtwork extends Component {
             <button type="submit">Update</button>
           </form>
         </section>
-      </>
+      </> )}
+      </MyContext.Consumer>
     )
   }
 }

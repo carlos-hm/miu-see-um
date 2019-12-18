@@ -19,7 +19,7 @@ exports.newArtwork = async (req, res) => {
     hallID: id
   });
 
-  await Hall.findByIdAndUpdate(id, { $push: { artworks: artwork._id } });
+  await Hall.findByIdAndUpdate(id, { $push: { artworks: artwork._id } }, { new: true });
 
   res.status(201).json({artwork});
 };

@@ -18,12 +18,8 @@ export default class UserMuseum extends Component{
 
   async componentDidMount() {
     if(!this.context.loggedUser) return this.props.history.push('/login')
-
-
     const {id} = this.props.match.params
-    //console.log(this.context.user)
-
-
+    
     const {
       data: { museum }
     } = await museumService.getUserMuseum(id)
@@ -41,6 +37,7 @@ export default class UserMuseum extends Component{
        })
 
      }
+     //console.log(this.state)
 
   }
 
@@ -56,15 +53,16 @@ export default class UserMuseum extends Component{
     const { _id } = this.state.museum
     const { name } = this.state;
 
-    const data = await museumService.addHall({
+    const { data }  = await museumService.addHall({
       name
     }, _id);
     
-    this.setState({
-      ...this.state,
-      halls: data
-    });
-    console.log('Hall added', data);
+    this.setState(prevState => ({
+      ...prevState,
+      halls: [...prevState.halls, data ]
+
+    }));
+    //console.log('Hall added', data);
   }
   
  
@@ -89,7 +87,9 @@ export default class UserMuseum extends Component{
             context.handleLogout(e)
             //props.history.push('/login')
           }} >
-          <button className="icon"  style={{backgroundImage:"url(/ic-exit-to-app.svg)", border:"none"}} type="submit">Logout</button>
+          <button className="icon"  style={{backgroundImage:"url(/ic-exit-to-app.svg)", border:"none"}} type="submit">
+            Logout
+          </button>
         </form>
       </StyledNav>
       <UserDashboard>

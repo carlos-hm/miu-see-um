@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AddArtworComp from '../../components/User/AddArtworkComp';
 import MuseumService from '../../services/MuseumService';
+import { MyContext } from '../../context';
 
 const museumService = new MuseumService();
 
@@ -53,17 +54,20 @@ export default class AddArtwork extends Component{
     const {
       data: { artwork }
     } = await museumService.addArtwork(formData, id);
+   
+    this.props.history.push(`/profile/${this.context.user._id}`)
 
-    this.setState({
-      ...this.state,
-      form: {
-        title: '',
-        description: '',
-        author: '',
-        photoURL: ''
-      },
-        artwork
-    })
+
+    // this.setState({
+    //   ...this.state,
+    //   form: {
+    //     title: '',
+    //     description: '',
+    //     author: '',
+    //     photoURL: ''
+    //   },
+    //     artwork
+    //})
 
     console.log('Artwork added', artwork);
   }
@@ -76,6 +80,8 @@ export default class AddArtwork extends Component{
     const { id } = this.props.match.params;
     const {hall} = this.state;
     return(
+      <MyContext.Consumer>
+      {context => (
       <>
       {
         (hall) ?
@@ -84,6 +90,7 @@ export default class AddArtwork extends Component{
         <form
           onSubmit= { e => {
             this.handleAddArtwork(e)
+            //this.props.history.goBack();
           }}
         >
           <input
@@ -117,6 +124,10 @@ export default class AddArtwork extends Component{
           <button type="submit">add</button> 
         </form>
       </>
+      )}
+      </MyContext.Consumer>
     )
   }
 }
+
+AddArtwork.contextType = MyContext;

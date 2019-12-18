@@ -13,11 +13,15 @@ export default function UserHallComp (props) {
           <small> add artwork</small>
         </Link>
         <div>
+        { (props.artworks) ?
+        <>
           { props.artworks.map (artwork => (
             <Link to={`/artwork/${artwork._id}/edit`}>
               <img src={artwork.photoURL} alt="artwork"/>
             </Link>
           ))}
+          </> :null
+        }
         </div>
       </Hall>
   )

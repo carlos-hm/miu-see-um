@@ -25,8 +25,6 @@ export default class EditHall extends Component {
       hall, 
       name: hall.name
     })
-
-    console.log(this.state)
   }
 
   inputChange = ({ target: { value, name } }) => {
@@ -54,8 +52,10 @@ export default class EditHall extends Component {
   handleDelete = async (e) => {
     e.preventDefault()
     const { id } = this.props.match.params;
-    
+    const { _id } = this.context.user
+
     await museumService.deleteHall(id);
+    this.props.history.push(`/profile/${_id}`)
     console.log('Hall deleted');
   }
 
@@ -74,7 +74,6 @@ export default class EditHall extends Component {
           <form
             onSubmit = { e => {
             this.handleDelete(e)
-            this.props.history.push(`/profile/${museumID}`)
           }}
         >
           <button type="submit">delete</button>
