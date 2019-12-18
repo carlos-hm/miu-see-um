@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import MuseumService from '../../services/MuseumService';
 import ArtworkDetailComp from '../../components/Museum/ArtworkComp';
-import EditArtworkComp from '../../components/User/EditArtworkComp';
 import { MyContext } from '../../context';
+import { EditView } from '../../styles/componets';
+
 
 const museumService = new MuseumService();
 
@@ -52,8 +53,6 @@ export default class EditArtwork extends Component {
   handleEditArtwork = async (e) => {
     e.preventDefault()
     const { _id } = this.state.artwork;
-
-    const { form } = this.state;
     const formData = new FormData()
 
     for(let key in this.state.form) {
@@ -86,13 +85,13 @@ export default class EditArtwork extends Component {
   render(){
     const { artwork } = this.state;
     const { form } = this.state;
-    const { user } = this.context.user
     return(
       <MyContext.Consumer>
       {context => (
       <>
+      <EditView>
         { (artwork) ?
-          <div>
+          <section>
           <form
             onSubmit = { e => {
             this.handleDelete(e)
@@ -107,7 +106,7 @@ export default class EditArtwork extends Component {
               author = { artwork.author }
               description =  { artwork.description }
             /> 
-          </div> : null
+          </section> : null
         }
         <section>
           <h2>Edit artwork</h2>
@@ -150,6 +149,7 @@ export default class EditArtwork extends Component {
             <button type="submit">Update</button>
           </form>
         </section>
+      </EditView>
       </> )}
       </MyContext.Consumer>
     )

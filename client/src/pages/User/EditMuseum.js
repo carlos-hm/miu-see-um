@@ -3,6 +3,7 @@ import MuseumDetailComp from '../../components/Museum/MuseumDetail';
 import MuseumService from '../../services/MuseumService';
 import { EditView } from '../../styles/componets';
 import { MyContext } from '../../context';
+import UserNav from '../../components/User/UserNav';
 
 const museumService = new MuseumService();
 
@@ -92,6 +93,12 @@ export default class EditMuseum extends Component{
     const { form } = this.state;
     console.log(museum)
     return(
+      <MyContext.Consumer>
+      {context => (
+      <>
+      <UserNav
+        museum = { museum }
+      />
       <EditView>
         <section>
           {
@@ -174,6 +181,9 @@ export default class EditMuseum extends Component{
           </form>
         </section>
       </EditView>
+      </>
+      )}
+      </MyContext.Consumer>
     )
   }
 }

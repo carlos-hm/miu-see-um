@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AddArtworComp from '../../components/User/AddArtworkComp';
 import MuseumService from '../../services/MuseumService';
 import { MyContext } from '../../context';
 
@@ -41,8 +40,6 @@ export default class AddArtwork extends Component{
   handleAddArtwork = async (e) => {
     e.preventDefault()
     const { id } = this.props.match.params
-
-    const { form } = this.state;
     const formData = new FormData()
 
     for(let key in this.state.form) {
@@ -57,18 +54,6 @@ export default class AddArtwork extends Component{
    
     this.props.history.push(`/profile/${this.context.user._id}`)
 
-
-    // this.setState({
-    //   ...this.state,
-    //   form: {
-    //     title: '',
-    //     description: '',
-    //     author: '',
-    //     photoURL: ''
-    //   },
-    //     artwork
-    //})
-
     console.log('Artwork added', artwork);
   }
 
@@ -77,7 +62,6 @@ export default class AddArtwork extends Component{
   }
 
   render() {
-    const { id } = this.props.match.params;
     const {hall} = this.state;
     return(
       <MyContext.Consumer>

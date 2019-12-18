@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MuseumDetailComp from '../../components/Museum/MuseumDetail';
 import MuseumService from '../../services/MuseumService';
-import {UserDashboard, StyledNav} from '../../styles/componets';
+import { UserDashboard } from '../../styles/componets';
 import UserHallComp from '../../components/User/UserHallComp';
-import AddHallComp from '../../components/User/AddHallComp';
 
 import { MyContext } from '../../context'
+import UserNav from '../../components/User/UserNav';
 
 
 const museumService = new MuseumService();
@@ -75,23 +75,9 @@ export default class UserMuseum extends Component{
       <MyContext.Consumer>
       {context => (
       <>
-      <StyledNav>
-        <figure>
-          <img src="https://res.cloudinary.com/carlos-hm/image/upload/v1576561407/Muum/MuuM_logo_r0fbjo.png" alt="MuuM logo"/>
-          { (museum) ?  
-          <img src={museum.logoURL} alt="Museum logo"/> : null
-          }
-        </figure>
-        <form
-          onSubmit={ e => {
-            context.handleLogout(e)
-            //props.history.push('/login')
-          }} >
-          <button className="icon"  style={{backgroundImage:"url(/ic-exit-to-app.svg)", border:"none"}} type="submit">
-            Logout
-          </button>
-        </form>
-      </StyledNav>
+      <UserNav
+        museum = {museum}
+      />
       <UserDashboard>
       <section>
         <aside>

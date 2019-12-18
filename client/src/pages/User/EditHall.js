@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MuseumService from '../../services/MuseumService';
-import { Hall } from '../../styles/componets';
-import EditHallComp from '../../components/User/EditHallComp';
+import { Hall, EditView, EditAside } from '../../styles/componets';
 import { MyContext } from '../../context';
 
 const museumService = new MuseumService();
@@ -60,61 +59,66 @@ export default class EditHall extends Component {
   }
 
   render() {
-    const { museumID } = this.props.match.params;
     const { hall } = this.state;
     const { name } = this.state;
     return(
       <>
-      {
-        (hall) ?
-        <>
-          <Link to={`/hall/${hall._id}`}>
-            <small>add </small>
-          </Link>
+        { (hall) ?
+          <>
+      <EditAside>
+        <Link className="iconBack">
+          back
+        </Link>
+        <h3>Edit hall</h3>
           <form
             onSubmit = { e => {
             this.handleDelete(e)
           }}
-        >
-          <button type="submit">delete</button>
-        </form>
-          <Link>
-            <small> delete</small>
-          </Link>
-          <Hall>
-            <h2>{hall.name}</h2>
-            <div>
-            {
-              (hall.artworks) ?
-               hall.artworks.map (artwork => (
-              <Link to={`/artwork/${artwork._id}/edit`}>
-                <img src={artwork.photoURL} alt="artwork"/>
-              </Link>
-            )) : null
-            }
-          </div>
-          </Hall>
+          >
+            <button type="submit" className="iconDeleteHall">delete</button>
+          </form>
+      </EditAside>
+      <EditView>
           <section>
-            <h2> Edit hall </h2>
-            <form 
-              onSubmit = { e => {
-                this.handleEditHall(e)
-              }}
-            >
-              <input 
-                name = "name"
-                placeholder = "Name"
-                type = "Text"
-                onChange = {this.inputChange}
-                value = {name}
-              />
-              <br/>
-              <button type="submit">Update</button>
-            </form>
+            <Hall>
+            <article>
+              <h2>{hall.name}</h2>
+              <Link className="iconAddArt" to={`/hall/${hall._id}`}>
+              add
+              </Link>
+            </article>
+              <div>
+              {
+                (hall.artworks) ?
+                hall.artworks.map (artwork => (
+                <Link to={`/artwork/${artwork._id}/edit`}>
+                  <img src={artwork.photoURL} alt="artwork"/>
+                </Link>
+              )) : null
+              }
+              </div>
+            </Hall>
           </section>
-        </>: null
-      }
-      
+            <section>
+              <form 
+                onSubmit = { e => {
+                  this.handleEditHall(e)
+                }}
+              >
+                <input 
+                  name = "name"
+                  placeholder = "Name"
+                  type = "Text"
+                  onChange = {this.inputChange}
+                  value = {name}
+                />
+                <br/>
+                <button type="submit">Update</button>
+              </form>
+            </section>
+      </EditView>
+          </>: null
+        }
       </>
     )
   }

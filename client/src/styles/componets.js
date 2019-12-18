@@ -97,6 +97,11 @@ export const Hall = styled.div`
   margin-top: 10%;
   & h2 {
     margin-left: 4%;
+    margin-right: 51%;
+  }
+  & article {
+    display: flex;
+    justify-content: flex-start;
   }
   & div {
     width: 100%;
@@ -192,6 +197,7 @@ export const UserDashboard = styled.div`
 
 export const EditView = styled.div`
   width: 100%;
+  margin-top: 100px;
   display: flex;
   justify-content: space-around;
   & section:first-child {
@@ -224,3 +230,15 @@ export const EditView = styled.div`
     }
   } 
 `;
+
+export const EditAside = styled.aside`
+  width: 96%;
+  margin: 5% auto 0;
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1px #707070;
+  & h3 {
+    margin-left: 2%;
+    width: 90%;
+  }
+`
