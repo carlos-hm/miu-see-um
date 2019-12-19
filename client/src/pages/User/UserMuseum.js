@@ -125,7 +125,7 @@ export default class UserMuseum extends Component{
             name = "name"
             placeholder = "Hall..."
             type = "text"
-            maxlength="10"
+            maxLength="10"
             onChange = {this.inputChange}
             required
           />

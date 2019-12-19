@@ -102,8 +102,8 @@ export default class EditHall extends Component {
               <div>
               {
                 (hall.artworks.length !== 0) ?
-                hall.artworks.map (artwork => (
-                <Link to={`/artwork/${artwork._id}/edit`}>
+                hall.artworks.map ((artwork, i) => (
+                <Link key={i} to={`/artwork/${artwork._id}/edit`}>
                   <img src={artwork.photoURL} alt="artwork"/>
                 </Link>
               )) : <div>no artworks yet</div>

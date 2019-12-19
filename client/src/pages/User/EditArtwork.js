@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import MuseumService from '../../services/MuseumService';
 import ArtworkDetailComp from '../../components/Museum/ArtworkComp';
 import { MyContext } from '../../context';
-import { EditView, EditAside } from '../../styles/componets';
+import { EditView, EditAside, AskDelete } from '../../styles/componets';
 
 
 const museumService = new MuseumService();
@@ -16,7 +15,8 @@ export default class EditArtwork extends Component {
       description: '',
       author: '',
       photoURL: ''
-    }
+    },
+    showDelete:false
   };
 
   async componentDidMount() {
@@ -36,8 +36,6 @@ export default class EditArtwork extends Component {
         photoURL: artwork.photoURL
       }
     })
-
-    console.log(this.context.user)
   }
 
   inputChange = ({ target: { value, name } }) => {
@@ -48,7 +46,6 @@ export default class EditArtwork extends Component {
         [name]: value
       }
     });
-    console.log(this.state)
   };
 
   handleEditArtwork = async (e) => {
@@ -67,8 +64,6 @@ export default class EditArtwork extends Component {
       ...prevState,
         artwork
     }))
-    console.log(this.state)
-
   }
 
   handleFile = e => {
@@ -80,7 +75,16 @@ export default class EditArtwork extends Component {
     const { id } = this.props.match.params;
 
     await museumService.deleteArtwork(id);
-    console.log('Artwork deleted');
+    this.props.history.push(`/profile/${this.context.user._id}`)
+  }
+
+  toggle = () =>  {
+    let value = !this.state.showDelete;
+   
+    this.setState(prevState => ({
+      ...prevState,
+      showDelete: value,
+    }))
   }
 
   goBack = () => {
@@ -88,8 +92,8 @@ export default class EditArtwork extends Component {
   }
  
   render(){
-    const { artwork } = this.state;
-    const { form } = this.state;
+    const { artwork, form, showDelete} = this.state;
+ 
     return(
       <MyContext.Consumer>
       {context => (
@@ -97,19 +101,19 @@ export default class EditArtwork extends Component {
         { (artwork) ?
         <>
       <EditAside>
-        <Link onClick={this.goBack} className="iconBack">
+        <b onClick={this.goBack} className="iconBack">
           back
-        </Link>
+        </b>
         <h3>Edit artwork</h3>
-        <form
-            onSubmit = { e => {
-            this.handleDelete(e)
-            this.props.history.push(`/profile/${this.context.user._id}`)
-          }}
-          >
-            <button type="submit" className="iconDeleteHall">delete</button>
-          </form>
+        <p onClick={this.toggle} className="iconDeleteHall">delete</p>
       </EditAside>
+      { (showDelete) ?
+      <AskDelete>
+        <p>Are you sure you want to delete this artwork?</p>
+        <button onClick={this.toggle}>Cancel</button>
+        <button onClick={this.handleDelete}>Delete</button>
+      </AskDelete> : null
+      }
       <EditView>
           <section>
             <ArtworkDetailComp

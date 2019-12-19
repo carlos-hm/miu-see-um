@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import MuseumService from '../../services/MuseumService';
 import { MyContext } from '../../context';
 import { EditView, EditAside } from '../../styles/componets';
@@ -27,7 +26,6 @@ export default class AddArtwork extends Component{
     } = await museumService.getHall(id);
 
     this.setState({hall})
-    console.log(this.state)
   }
 
   inputChange = ({ target: { value, name } }) => {
@@ -38,7 +36,6 @@ export default class AddArtwork extends Component{
         [name]: value
       }
     });
-    console.log(this.state)
   };
 
   handleAddArtwork = async (e) => {
@@ -52,13 +49,9 @@ export default class AddArtwork extends Component{
 
     formData.append('photoURL', this.state.file)
 
-    const {
-      data: { artwork }
-    } = await museumService.addArtwork(formData, id);
+    await museumService.addArtwork(formData, id);
    
     this.props.history.push(`/profile/${this.context.user._id}`)
-
-    console.log('Artwork added', artwork);
   }
 
   handleFile = e => {
@@ -76,9 +69,9 @@ export default class AddArtwork extends Component{
       {context => (
       <>
       <EditAside>
-        <Link onClick={this.goBack} className="iconBack">
+        <b onClick={this.goBack} className="iconBack">
           back
-        </Link>
+        </b>
         {
         (hall) ? 
         <h3>new artwork on {hall.name}</h3>: null

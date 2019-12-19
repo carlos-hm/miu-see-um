@@ -19,7 +19,6 @@ import AddHallComp from './components/User/AddHallComp';
 function Routes() {
   return (
     <BrowserRouter>
-      {/* <Navbar> */}
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={SignupContainer} />
@@ -35,7 +34,6 @@ function Routes() {
           <Route exact path="/hall/:id/edit" component = { EditHall }/>
           <Route exact path="/hall/:id/new-hall" component = { AddHallComp }/>
         </Switch>
-      {/* </Navbar> */}
     </BrowserRouter>
   )
 };

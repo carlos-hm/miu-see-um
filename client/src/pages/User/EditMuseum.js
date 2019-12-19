@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import MuseumDetailComp from '../../components/Museum/MuseumDetail';
 import MuseumService from '../../services/MuseumService';
 import { EditView, EditAside } from '../../styles/componets';
@@ -92,15 +91,15 @@ export default class EditMuseum extends Component{
   render() {
     const { museum } = this.state;
     const { form } = this.state;
-    console.log(museum)
+
     return(
       <MyContext.Consumer>
       {context => (
       <>
       <EditAside>
-        <Link onClick={this.goBack} className="iconBack">
+        <b onClick={this.goBack} className="iconBack">
           back
-        </Link>
+        </b>
         <h3>Edit museum</h3>
       </EditAside>
       <EditView>
@@ -186,42 +185,42 @@ export default class EditMuseum extends Component{
             <input style={{display: "none"}} 
                 name="mapURL"
                 type="text"
-                value={form.mapURL}
+                defaultValue={form.mapURL}
             />
             <input style={{display: "none"}}
                 name="monday"
                 type="text"
-                value={form.monday}
+                defaultValue={form.monday}
             />
             <input style={{display: "none"}} 
                 name="tuesday"
                 type="text"
-                value={form.tuesday}
+                defaultValue={form.tuesday}
             />
             <input style={{display: "none"}} 
                 name="wednesday"
                 type="text"
-                value={form.wednesday}
+                defaultValue={form.wednesday}
             />
             <input style={{display: "none"}} 
                 name="thursday"
                 type="text"
-                value={form.thursday}
+                defaultValue={form.thursday}
             />
             <input style={{display: "none"}} 
                 name="friday"
                 type="text"
-                value={form.friday}
+                defaultValue={form.friday}
             />
             <input style={{display: "none"}} 
                 name="saturday"
                 type="text"
-                value={form.saturday}
+                defaultValue={form.saturday}
             />
             <input style={{display: "none"}} 
                 name="sunday"
                 type="text"
-                value={form.sunday}
+                defaultValue={form.sunday}
             />
             <br/>
             <button type="submit">Submit</button>

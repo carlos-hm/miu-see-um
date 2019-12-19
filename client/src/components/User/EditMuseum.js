@@ -42,6 +42,8 @@ export default class EditMuseumComp extends Component{
     formData.append('photoURL', this.state.file)
 
     const museum = await museumService.updateMuseum(formData, museumID);
+    console.log(museum);
+
     this.setState()
   }
 
