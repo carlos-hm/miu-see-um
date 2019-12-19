@@ -133,6 +133,7 @@ export default class EditArtwork extends Component {
               type="text"
               onChange= {this.inputChange}
               value = {form.title}
+              required
             />
             <br/>
             <label>description</label>
@@ -143,6 +144,7 @@ export default class EditArtwork extends Component {
               type="text"
               onChange= {this.inputChange}
               value = {form.description}
+              required
             />
             <br/>
             <label>author</label>
@@ -153,6 +155,7 @@ export default class EditArtwork extends Component {
               type ="text"
               onChange = {this.inputChange}
               value = {form.author}
+              required
             />
             <br/>
             <label>photo</label>

@@ -57,7 +57,13 @@ exports.updateMuseum = async (req, res) => {
     address, 
     ticket, 
     mapURL,
-    hours,
+    monday,
+    tuesday,
+    wednesday,
+    thursday,
+    friday,
+    saturday,
+    sunday
   } = req.body;
 
   const museum = await Museum.findByIdAndUpdate(id, {
@@ -68,7 +74,15 @@ exports.updateMuseum = async (req, res) => {
     ticket, 
     photoURL: req.file.secure_url,
     mapURL,
-    hours,
+    hours: {
+      monday,
+      tuesday,
+      wednesday,
+      thursday,
+      friday,
+      saturday,
+      sunday
+      },
     updated: true,
   }, { new: true });
 

@@ -6,12 +6,8 @@ const museumService = new MuseumService();
 export default class AddHallComp extends Component {
   state = {
     name: ''
-  } 
-
-  componentDidMount() {
-
   }
-
+  
   inputChange = ({ target: { value, name } }) => {
     this.setState({
       ...this.state,
@@ -24,11 +20,9 @@ export default class AddHallComp extends Component {
     const { museumID } = this.props
     const { name } = this.state;
 
-    const data = await museumService.addHall({
+    await museumService.addHall({
       name
     }, museumID);
-
-    console.log('Hall added', data);
   }
 
   render() {

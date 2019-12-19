@@ -7,8 +7,8 @@ export default function HallComp (props) {
       <Hall>
         <h2>{ props.name }</h2>
         <div>
-          { props.artworks.map (artwork => (
-            <Link to={`/artwork/${artwork._id}`}>
+          { props.artworks.map ((artwork, i) => (
+            <Link key={i} to={`/artwork/${artwork._id}`}>
               <img src={artwork.photoURL} alt="artwork"/>
             </Link>
           ))}

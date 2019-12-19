@@ -12,6 +12,13 @@ export const StyledNav = styled.nav`
   top: 0px;
   max-width: 93%;
   background-color: white;
+  & .authLink {
+    position: absolute;
+    top: 34%;
+    right: 5%;
+    color: black;
+    text-decoration: none;
+  }
   & figure {
     width: 20%;
     display: flex;
@@ -35,15 +42,16 @@ export const MuseumCard = styled.div`
     height: auto;
     margin: 10% auto;
     box-sizing: border-box;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+    border-bottom: solid 0.5px grey;
   & img {
     width: 100%;
     height: 150px;
     margin: 5% auto;
     display: block;
     object-fit: cover;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
   }
   & div {
     width: 90%;
@@ -258,7 +266,8 @@ export const EditView = styled.div`
       }
       & label {
         color: #707070;
-      }
+        font-size: .8em;
+      } 
       & button {
         font-family: 'Montserrat',sans-serif;
         display: flex;
@@ -299,9 +308,101 @@ export const MuseumNav = styled.nav`
     top: 20%;
     left: 34%;
   }
+  & h3 {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+  }
 `;
 
 export const MarginCont = styled.div`
   width: 100%;
   margin-top: 27%;
+`;
+
+export const AskDelete = styled.div`   
+  width: 62%;
+  margin: 3% auto;
+  text-align: center;
+  padding: 2% 0%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  & p {
+    width: 100%;
+  }
+  & button {
+      font-family: 'Montserrat',sans-serif;
+      padding: 2% 5%;
+      background-color: #00A5A8;
+      color: white;
+      border: none;
+      font-size: 1em;
+      margin-top: 2%;
+      margin-left: 4%;
+  } & button:last-child {
+      background-color: #FF4B47;
+  }
+`;
+
+export const Added = styled.div`
+    width: 70%;
+    margin: 37% auto 0%;
+    text-align: center;
+    color: #00A5A8;
+    border: solid;
+    padding: 6% 0%;
+    /*border-radius: 7px;*/
+`;
+
+export const AuthForm = styled.form`
+  width: 50%;
+  margin: 4% 0% 0% 0%;
+  display: flex;
+  flex-direction: column;
+  & input {
+    font-family: 'Montserrat',sans-serif;
+    width: 90%;
+    margin: 4% 0 1%;
+    padding: 1% 0% 1% 2%;
+    font-size: 1em;
+    border: none;
+    border-bottom: solid 1px #707070;
+  };
+  & label {
+        color: #707070;
+        font-size: .8em;
+      }
+  & button {
+      width: 30%;
+      font-family: 'Montserrat',sans-serif;
+      padding: 2% 5%;
+      background-color: #00A5A8;
+      color: white;
+      border: none;
+      font-size: 1em;
+      margin-top: 2%;
+      margin-left: 62%;
+  }
+`;
+
+export const AuthImage = styled.div`
+  width: 90%;
+  margin: 14% auto 0%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  & h2  {
+    width: 100%;
+    margin: 0% 0% 5% 2%;
+
+  }
+  img{
+    width: 40%;
+    height: 50vh;
+    object-fit: cover;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+  }
 `

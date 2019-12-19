@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MuseumService from '../../services/MuseumService';
-import { Hall, EditView, EditAside } from '../../styles/componets';
+import { Hall, EditView, EditAside, AskDelete } from '../../styles/componets';
 import { MyContext } from '../../context';
 
 const museumService = new MuseumService();
 
 export default class EditHall extends Component {
   state = {
-    name: ''
+    name: '',
+    showDelete: false,
   };
 
   async componentDidMount() {
@@ -43,8 +44,6 @@ export default class EditHall extends Component {
       ...prevState,
       hall 
     }))
-
-    console.log(this.state);
   }
 
 
@@ -55,7 +54,15 @@ export default class EditHall extends Component {
 
     await museumService.deleteHall(id);
     this.props.history.push(`/profile/${_id}`)
-    console.log('Hall deleted');
+  }
+
+  toggle = () =>  {
+    let value = !this.state.showDelete;
+   
+    this.setState(prevState => ({
+      ...prevState,
+      showDelete: value,
+    }))
   }
 
   goBack = () => {
@@ -63,28 +70,29 @@ export default class EditHall extends Component {
   }
 
   render() {
-    const { hall } = this.state;
-    const { name } = this.state;
+    const { hall, name, showDelete } = this.state;
+
     return(
       <>
         { (hall) ?
           <>
       <EditAside>
-        <Link onClick={this.goBack} className="iconBack">
+        <p onClick={this.goBack} className="iconBack">
           back
-        </Link>
+        </p>
         <h3>Edit hall</h3>
-          <form
-            onSubmit = { e => {
-            this.handleDelete(e)
-          }}
-          >
-            <button type="submit" className="iconDeleteHall">delete</button>
-          </form>
+        <p onClick={this.toggle} className="iconDeleteHall">delete</p>
       </EditAside>
+      { (showDelete) ?
+      <AskDelete>
+        <p>Are you sure you want to delete this hall?<br/>This action will delete all the artworks in it to...</p>
+        <button onClick={this.toggle}>Cancel</button>
+        <button onClick={this.handleDelete}>Delete</button>
+      </AskDelete> : null
+      }
       <EditView>
           <section>
-            <Hall>
+            <Hall className="editHallMus">
             <article>
               <h2>{hall.name}</h2>
               <Link className="iconAddArt" to={`/hall/${hall._id}`}>
@@ -111,11 +119,14 @@ export default class EditHall extends Component {
               >
                 <input 
                   name = "name"
-                  placeholder = "Name"
+                  placeholder = "Hall..."
                   type = "Text"
                   onChange = {this.inputChange}
                   value = {name}
+                  required
                 />
+                <br/>
+                <label>name</label>
                 <br/>
                 <button type="submit">Update</button>
               </form>

@@ -83,13 +83,52 @@ body{
   background-position: center;
   background-repeat: no-repeat;
   text-indent: -9999px;
+  position: absolute;
+    right: 5%;
+    top: 28%;
+};
+
+.iconMap { 
+  display: block;
+  width: 35px;
+  padding: 10px 0%;
+  border: none;
+  background-image: url("/ic-map.svg");
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+  position: absolute;
+    right: 15%;
+    top: 28%;
+};
+
+.iconBackMuseum { 
+  display: block;
+  width: 35px;
+  padding: 10px 0%;
+  border: none;
+  background-image: url("/ic-arrow-back.svg");
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+  position: absolute;
+    left: 5%;
+    top: 28%;
+  margin: 0;
 };
 
 .firstHall {
-      margin: 24% 0 10%;
-    }
+   margin: 24% 0 10%;
+}
+
+.editHallMus{
+  margin-top: 0% !important;
+}
 
 `;
+
 
 
 export default GlobalStyles;

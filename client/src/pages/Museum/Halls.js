@@ -20,7 +20,10 @@ export default class Halls extends Component{
       data: { museum }
     } = await museumService.getMuseum(id);
     this.setState({ halls, museum })
-    console.log(this.state)
+  }
+
+  goBack = () => {
+    this.props.history.goBack()
   }
 
   render() {
@@ -29,16 +32,17 @@ export default class Halls extends Component{
     return(
       <MarginCont>
         <MuseumNav>
+          <p className="iconBackMuseum" onClick={this.goBack}> detail </p>
         {
           (museum) ? 
           <img src={museum.logoURL} alt="MuuM logo"/> : null
         }
           <Link  className="iconDetail" to={`/detail/${id}`}> detail </Link>
-          <Link to={`/map/${id}` }> map </Link>
+          <Link className="iconMap" to={`/map/${id}` }> map </Link>
         </MuseumNav>
       { (halls) ?
-        halls.map (hall => (
-          <HallComp
+        halls.map ((hall, i) => (
+          <HallComp key={i}
             name = {hall.name}
             artworks = {hall.artworks}
           />

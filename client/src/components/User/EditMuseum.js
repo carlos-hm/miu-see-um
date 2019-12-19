@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import MuseumService from '../../services/MuseumService';
 
-//import { MyContext } from '../../context';
-
-
 const museumService = new MuseumService();
 
 export default class EditMuseumComp extends Component{
   state = {
     file:{},
-
-    // editMuseumForm:{
     form: {
       name: '',
       short: '',
@@ -20,12 +15,7 @@ export default class EditMuseumComp extends Component{
       photoURL: '',
       mapURL: '' 
     }
-    // }
   };
-
-  componentDidMount() {
-    //console.log(this.context.editMuseumForm)
-  }
 
   inputChange = ({ target: { value, name } }) => {
     this.setState({
@@ -35,23 +25,12 @@ export default class EditMuseumComp extends Component{
         [name]: value
       }
     });
-    console.log(this.state)
   };
 
 
   handleEditMuseum = async (e) => {
     e.preventDefault()
     const { museumID } = this.props;
-
-    // const { 
-    //   name, 
-    //   short, 
-    //   description, 
-    //   address, 
-    //   ticket, 
-    //   photoURL, 
-    //   mapURL 
-    // } = this.state;
 
     const { form } = this.state;
     const formData = new FormData()
@@ -63,20 +42,7 @@ export default class EditMuseumComp extends Component{
     formData.append('photoURL', this.state.file)
 
     const museum = await museumService.updateMuseum(formData, museumID);
-    console.log(museum);
-
     this.setState()
-
-    // const data = await museumService.updateMuseum({
-    //   name, 
-    //   short, 
-    //   description, 
-    //   address, 
-    //   ticket, 
-    //   photoURL, 
-    //   mapURL
-    // }, museumID);
-    // console.log('Museum updated', data);
   }
 
   handleFile = e => {
@@ -84,19 +50,13 @@ export default class EditMuseumComp extends Component{
   }
 
   render() {
-    //const { editMuseumForm } = this.state;
     return(
-      // <MyContext.Consumer>
-      // { context => (
         <>
         <h2>Edit museumo</h2>
         <form 
-        // onSubmit = { this.handleEditMuseum } >
          onSubmit={ e => {
           this.handleEditMuseum(e)
-          //props.history.push('/login')
         }} >
-        {/* onSubmit = { e => this.handleEditMuseum(e, this.props.museumID) }> */}
           <input 
               name="name"
               placeholder="Name"
@@ -149,11 +109,6 @@ export default class EditMuseumComp extends Component{
           <button type="submit">Submit</button>
         </form>
         </>
-      // )}
-
-      // </MyContext.Consumer>
     )
   }
 }
-
-//EditMuseumComp.contextType = MyContext;

@@ -21,6 +21,7 @@ class MyProvider extends Component {
       password: ''
     },
     user: {},
+    error: false
   }
 
   componentDidMount() {
@@ -68,7 +69,8 @@ class MyProvider extends Component {
         }
       })
     } catch (err) {
-      console.log(err)
+      this.setState({...this.state, error: true})
+      console.log(this.state)
     }
     //console.log('User created', data);
   }
@@ -81,7 +83,8 @@ class MyProvider extends Component {
         cb()
       })
       .catch(err => {
-        console.log(err)
+        this.setState({...this.state, error: true})
+        console.log(this.state)
       })
   }
 

@@ -17,7 +17,9 @@ export default class EditMuseum extends Component{
       address: '',
       ticket: '',
       photoURL: '',
-      mapURL: '' 
+      mapURL: '',
+      hours: {
+      }
     }
   };
 
@@ -38,10 +40,16 @@ export default class EditMuseum extends Component{
         address: museum.address,
         ticket: museum.ticket,
         photoURL: museum.photoURL,
-        mapURL: museum.mapURL
+        mapURL: museum.mapURL,
+        monday: museum.hours.monday,
+        tuesday: museum.hours.tuesday,
+        wednesday: museum.hours.wednesday,
+        thursday: museum.hours.thursday,
+        friday: museum.hours.friday,
+        saturday: museum.hours.saturday,
+        sunday: museum.hours.sunday
       }
     })
-    console.log(this.state)
   }
 
   inputChange = ({ target: { value, name } }) => {
@@ -52,14 +60,12 @@ export default class EditMuseum extends Component{
         [name]: value
       }
     });
-    //console.log(this.state)
   };
 
 
   handleEditMuseum = async (e) => {
     e.preventDefault()
     const { _id } = this.state.museum;
-    //const { form } = this.state;
     const formData = new FormData()
 
     for(let key in this.state.form) {
@@ -72,15 +78,6 @@ export default class EditMuseum extends Component{
     this.setState(prevState => ({
       ...prevState, 
       museum,
-        form: {
-          name: '',
-          short: '',
-          description: '',
-          address: '',
-          ticket: '',
-          photoURL: '',
-          mapURL: '' 
-        }, 
     }))
   }
 
@@ -100,9 +97,6 @@ export default class EditMuseum extends Component{
       <MyContext.Consumer>
       {context => (
       <>
-      {/* <UserNav
-        museum = { museum }
-      /> */}
       <EditAside>
         <Link onClick={this.goBack} className="iconBack">
           back
@@ -126,16 +120,16 @@ export default class EditMuseum extends Component{
         <section>
            { (form) ?
           <form
-          onSubmit={ e => {
-            this.handleEditMuseum(e)
-            //props.history.push('/login')
-          }} >
+            onSubmit={ e => {
+              this.handleEditMuseum(e)
+            }} >
             <input 
                 name="name"
                 placeholder="Name"
                 type="text"
                 onChange= {this.inputChange}
                 value={form.name}
+                required
               />
             <label>museum name</label>
             <br/>
@@ -145,6 +139,7 @@ export default class EditMuseum extends Component{
                 type="text"
                 onChange= {this.inputChange}
                 value={form.short}
+                required
             />
             <label>musuem short</label>
             <br/>
@@ -154,6 +149,7 @@ export default class EditMuseum extends Component{
                 type="text"
                 onChange= {this.inputChange}
                 value={form.description}
+                required
             />
             <label>description</label>
             <br/>
@@ -163,6 +159,7 @@ export default class EditMuseum extends Component{
                 type="text"
                 onChange= {this.inputChange}
                 value={form.address}
+                required
             />
             <label>address</label>
             <br/>
@@ -172,6 +169,7 @@ export default class EditMuseum extends Component{
                 type="text"
                 onChange= {this.inputChange}
                 value={form.ticket}
+                required
             />
             <br/>
             <label>ticket price</label>
@@ -185,14 +183,46 @@ export default class EditMuseum extends Component{
             <br/>
             <label>photo</label>
             <br/>
-            <input 
+            <input style={{display: "none"}} 
                 name="mapURL"
-                placeholder="mapURL"
                 type="text"
-                onChange= {this.inputChange}
                 value={form.mapURL}
             />
-            <label>interior map</label>
+            <input style={{display: "none"}}
+                name="monday"
+                type="text"
+                value={form.monday}
+            />
+            <input style={{display: "none"}} 
+                name="tuesday"
+                type="text"
+                value={form.tuesday}
+            />
+            <input style={{display: "none"}} 
+                name="wednesday"
+                type="text"
+                value={form.wednesday}
+            />
+            <input style={{display: "none"}} 
+                name="thursday"
+                type="text"
+                value={form.thursday}
+            />
+            <input style={{display: "none"}} 
+                name="friday"
+                type="text"
+                value={form.friday}
+            />
+            <input style={{display: "none"}} 
+                name="saturday"
+                type="text"
+                value={form.saturday}
+            />
+            <input style={{display: "none"}} 
+                name="sunday"
+                type="text"
+                value={form.sunday}
+            />
             <br/>
             <button type="submit">Submit</button>
           </form>: null

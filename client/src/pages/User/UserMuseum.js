@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MuseumDetailComp from '../../components/Museum/MuseumDetail';
 import MuseumService from '../../services/MuseumService';
-import { UserDashboard } from '../../styles/componets';
+import { UserDashboard, Added} from '../../styles/componets';
 import UserHallComp from '../../components/User/UserHallComp';
-
 import { MyContext } from '../../context'
 import UserNav from '../../components/User/UserNav';
 
@@ -14,7 +13,8 @@ const museumService = new MuseumService();
 export default class UserMuseum extends Component{
   state = {
     name: '',
-    showForm: false
+    showForm: false,
+    added: false
   };
 
   async componentDidMount() {
@@ -38,8 +38,6 @@ export default class UserMuseum extends Component{
        })
 
      }
-     //console.log(this.state)
-
   }
 
   inputChange = ({ target: { value, name } }) => {
@@ -60,10 +58,10 @@ export default class UserMuseum extends Component{
     
     this.setState(prevState => ({
       ...prevState,
-      halls: [...prevState.halls, data ]
-
+      halls: [...prevState.halls, data ],
+      added: true
     }));
-    //console.log('Hall added', data);
+
   }
 
   toggle = () =>  {
@@ -77,7 +75,7 @@ export default class UserMuseum extends Component{
   
  
   render() {
-    const { museum, halls, showForm} = this.state;
+    const { museum, halls, showForm, added} = this.state;
     const { id } = this.props.match.params
 
     return(
@@ -109,7 +107,7 @@ export default class UserMuseum extends Component{
       <section>
       <aside className="halls">
         <h3>halls</h3>
-        <Link className="icon" style={{backgroundImage:"url(/ic-add-circle.svg)"}} onClick={this.toggle}> add </Link>
+        <b className="icon" style={{backgroundImage:"url(/ic-add-circle.svg)"}} onClick={this.toggle}> add </b>
       </aside>
       <div className="firstHall">
 
@@ -129,6 +127,7 @@ export default class UserMuseum extends Component{
             type = "text"
             maxlength="10"
             onChange = {this.inputChange}
+            required
           />
           <label>name</label>
           <br/>
@@ -136,9 +135,12 @@ export default class UserMuseum extends Component{
           </form>
         </div> : null
       }
+      { (added) ?
+        <Added>Hall added</Added> : null
+      }
         { (halls) ?
-          halls.map (hall => (
-            <UserHallComp
+          halls.map ((hall, i) => (
+            <UserHallComp key={i}
               name = {hall.name}
               artworks = {hall.artworks}
               hallID = {hall._id}

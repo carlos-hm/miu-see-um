@@ -17,8 +17,8 @@ export default function UserHallComp (props) {
         <div>
         { (props.artworks) ?
         <>
-          { props.artworks.map (artwork => (
-            <Link to={`/artwork/${artwork._id}/edit`}>
+          { props.artworks.map ((artwork, i )=> (
+            <Link key={i} to={`/artwork/${artwork._id}/edit`}>
               <img src={artwork.photoURL} alt="artwork"/>
             </Link>
           ))}

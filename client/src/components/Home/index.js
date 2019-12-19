@@ -26,8 +26,8 @@ export default class Home extends Component{
         <MuseumNav>
           <img src="https://res.cloudinary.com/carlos-hm/image/upload/v1576705470/Muum/MuuM_logoH_fo8fy5.png" alt="MuuM logo"/>
         </MuseumNav>
-          {museums.map (museum => (
-            <MuseumCardComp
+          {museums.map ((museum, i)=> (
+            <MuseumCardComp key={i}
               route = { museum._id }
               name = { museum.name }
               address = { museum.address }

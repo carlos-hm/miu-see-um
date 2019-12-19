@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyledNav} from '../../styles/componets';
+import { StyledNav } from '../../styles/componets';
 import { MyContext } from '../../context'
 
 export default function UserNav(props) {
@@ -16,7 +16,6 @@ export default function UserNav(props) {
         <form
           onSubmit={ e => {
             context.handleLogout(e)
-            //props.history.push('/login')
           }} >
           <button className="icon"  style={{backgroundImage:"url(/ic-exit-to-app.svg)", border:"none"}} type="submit">
             Logout
