@@ -8,18 +8,11 @@ export default class  SignupContainer extends Component {
   state = {
     showError: false,
   }
-
-  componentDidMount() {
-    console.log(this.state)
-  }
-
+  
   componentDidUpdate() {
     if(this.context.loggedUser) {
-      //console.log(this.context.user)
       return this.props.history.push(`/profile/${this.context.user._id}`)
-    }
-    console.log(this.state)
-  
+    }  
   }
 
   toggle = () =>  {
