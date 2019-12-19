@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export default class MuseumService {
-  //baseURL = 'https://cryptic-crag-06725.herokuapp.com';
-  baseURL = 'http://localhost:3000';
+  baseURL = 'https://cryptic-crag-06725.herokuapp.com';
+  //baseURL = 'http://localhost:3000';
   museums = axios.create({
     baseURL: this.baseURL,
     withCredentials: true
