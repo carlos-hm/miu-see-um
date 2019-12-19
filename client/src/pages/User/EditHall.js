@@ -85,7 +85,7 @@ export default class EditHall extends Component {
       </EditAside>
       { (showDelete) ?
       <AskDelete>
-        <p>Are you sure you want to delete this hall?<br/>This action will delete all the artworks in it to...</p>
+        <p>Are you sure you want to delete this hall?<br/>This action will delete all the artworks in it too...</p>
         <button onClick={this.toggle}>Cancel</button>
         <button onClick={this.handleDelete}>Delete</button>
       </AskDelete> : null

@@ -334,7 +334,7 @@ export const AskDelete = styled.div`
   & button {
       font-family: 'Montserrat',sans-serif;
       padding: 2% 5%;
-      background-color: #00A5A8;
+      background-color: #CECECE;
       color: white;
       border: none;
       font-size: 1em;

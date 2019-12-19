@@ -80,10 +80,10 @@ export default class AddArtwork extends Component{
       <EditView>
         <section>
           <ArtworkDetailComp
-            photoURL = "https://res.cloudinary.com/carlos-hm/image/upload/v1576540607/Muum/muac_c_0.jpg.jpg"
+            photoURL = "https://res.cloudinary.com/carlos-hm/image/upload/v1576772564/Muum/aw_photo_p28hgi.png"
             title = "Artwork title"
             author = "Author name"
-            description =  "Artwork description"
+            description =  "The description of the artwork will be displayed here..."
           /> 
         </section>
         <section>

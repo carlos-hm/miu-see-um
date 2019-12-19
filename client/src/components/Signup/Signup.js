@@ -6,6 +6,11 @@ import { StyledNav, AuthForm, AuthImage } from '../../styles/componets'
 
 export default class  SignupContainer extends Component {
   state = {
+    showError: false,
+  }
+
+  componentDidMount() {
+    console.log(this.state)
   }
 
   componentDidUpdate() {
@@ -13,10 +18,21 @@ export default class  SignupContainer extends Component {
       //console.log(this.context.user)
       return this.props.history.push(`/profile/${this.context.user._id}`)
     }
+    console.log(this.state)
+  
   }
 
+  toggle = () =>  {
+    let value = !this.state.showError;
+
+    this.setState(prevState => ({
+      ...prevState,
+      showError: value,
+    }))
+  }
+  
+
   render() {
-    const {error} = this.context
     return (
       <MyContext.Consumer>
       { context => (
@@ -38,6 +54,7 @@ export default class  SignupContainer extends Component {
           <AuthForm
             onSubmit={ e => {
               context.handleSignup(e)
+              this.toggle()
             }}
             >
             <h3>Signup</h3>
@@ -72,7 +89,7 @@ export default class  SignupContainer extends Component {
               <label>password</label>
               <br/>
               {
-              (error) ?
+              (context.error) ?
               <h4 style={{color:"#FF4B47", marginTop:"0"}}>User already exists</h4> : null
               }
               <button htmltype="submit">Signup</button>
